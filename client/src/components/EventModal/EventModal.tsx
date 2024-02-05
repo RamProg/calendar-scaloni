@@ -1,5 +1,5 @@
 const EventModal = () => {
-  return <div>EventModal</div>;
-};
+  return <div>EventModal</div>
+}
 
-export default EventModal;
+export default EventModal
