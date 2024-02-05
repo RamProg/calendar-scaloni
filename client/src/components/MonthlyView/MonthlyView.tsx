@@ -1,16 +1,16 @@
-import { daysOfTheWeek } from '@/src/constants'
-import { getDaysInMonth, getFirstDayOfTheMonth } from '@/src/utils/dates'
 import { useState } from 'react'
 import MonthlyNavBar from './MonthlyNavBar/MonthlyNavBar'
-
-const rows = new Array(5).fill(null)
-const columns = new Array(7).fill(null)
+import MonthlyCalendar from './MonthlyCalendar/MonthlyCalendar'
+import { MonthType } from '@/src/types'
 
 export type nextOrPrevious = 'next' | 'previous'
 
+const currentMonth = new Date().getMonth() + 1;
+const currentYear = new Date().getFullYear();
+
 const MonthlyView = () => {
-  const [month, setMonth] = useState(2)
-  const [year, setYear] = useState(2024)
+  const [month, setMonth] = useState<MonthType>(currentMonth as MonthType)
+  const [year, setYear] = useState<number>(currentYear)
 
   const onChangeDate = (dateDirection: nextOrPrevious) => {
     if (dateDirection === 'next') {
@@ -18,7 +18,7 @@ const MonthlyView = () => {
         setMonth(1)
         setYear((prev) => prev + 1)
       } else {
-        setMonth((prev) => prev + 1)
+        setMonth((prev) => prev + 1 as MonthType)
       }
     }
 
@@ -26,65 +26,16 @@ const MonthlyView = () => {
       if (month === 1) {
         setMonth(12)
         setYear((prev) => prev - 1)
-      } else {
-        setMonth((prev) => prev - 1)
+      } else if (month > 12) {
+        setMonth((prev) => prev - 1 as MonthType)
       }
     }
   }
 
-  const startingDay = getFirstDayOfTheMonth(month, year)
-  const lastDay: number = getDaysInMonth(month, year)
-
-  let nextDay: number = 0
-
   return (
     <div className="flex flex-col w-screen h-screen">
       <MonthlyNavBar month={month} year={year} onChangeDate={onChangeDate} />
-      <table className="w-full h-full mx-auto border border-collapse border-gray-200 table-auto">
-        <thead>
-          <tr>
-            {daysOfTheWeek.map((day) => {
-              const firstThreeLetters = day.substring(0, 3)
-
-              return (
-                <th
-                  key={day}
-                  className="h-2 py-2 border border-gray-200"
-                  scope="col"
-                >
-                  {firstThreeLetters}
-                </th>
-              )
-            })}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((_, i) => {
-            return (
-              <tr key={i}>
-                {columns.map((_, j) => {
-                  if (nextDay || startingDay === j) {
-                    if (nextDay < lastDay) {
-                      nextDay++
-                    } else {
-                      nextDay = 0
-                    }
-                  }
-
-                  return (
-                    <td
-                      key={`${i}-${j}`}
-                      className="px-4 py-2 text-center align-text-top border border-gray-200"
-                    >
-                      {nextDay > 0 ? nextDay : ''}
-                    </td>
-                  )
-                })}
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+      <MonthlyCalendar month={month} year={year} />
     </div>
   )
 }
