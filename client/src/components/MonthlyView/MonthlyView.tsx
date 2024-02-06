@@ -33,7 +33,7 @@ const MonthlyView = () => {
   }
 
   return (
-    <div className="flex flex-col w-screen h-screen">
+    <div className="flex flex-col w-screen h-screen p-4">
       <MonthlyNavBar month={month} year={year} onChangeDate={onChangeDate} />
       <MonthlyCalendar month={month} year={year} />
     </div>

@@ -1,6 +1,14 @@
-import useTasks from '@/src/hooks/useTasks/useTasks';
+import useEvents from '@/src/hooks/useEvents/useEvents';
 import { MonthType } from '@/src/types';
 import { getDaysInMonth, getFirstDayOfTheMonth } from '@/src/utils/dates';
+import MonthlyTableCell from './MonthlyTableCell/MonthlyTableCell';
+
+const eventsInMonth = {
+  0: [{}, {}],
+  1: {},
+};
+
+eventsInMonth[0];
 
 type MonthlyTableBodyProps = {
   month: MonthType;
@@ -11,10 +19,12 @@ const rows = new Array(5).fill(null);
 const columns = new Array(7).fill(null);
 
 const MonthlyTableBody: React.FC<MonthlyTableBodyProps> = ({ month, year }) => {
-  const tasks = useTasks(month, year);
+  const { monthlyEventsByDay } = useEvents({
+    month,
+    year,
+  });
 
-  const firstThreeTasks = tasks.slice(0, 3);
-  const showMore = tasks.length > 3;
+  console.log({ monthlyEventsByDay });
 
   const startingDay = getFirstDayOfTheMonth(month, year);
   const lastDay: number = getDaysInMonth(month, year);
@@ -38,29 +48,16 @@ const MonthlyTableBody: React.FC<MonthlyTableBodyProps> = ({ month, year }) => {
               return (
                 <td
                   key={`${i}-${j}`}
-                  className="overflow-hidden align-text-top border border-gray-200"
+                  className="overflow-hidden align-text-top border-t border-l border-gray-200 first:border-l-0"
                 >
                   {nextDay > 0 && (
-                    <>
-                      <p className="py-1 text-center">{nextDay}</p>
-                      <ul className="h-1 list-disc list-inside">
-                        {firstThreeTasks.map((task, i) => {
-                          return (
-                            <li
-                              key={task.id}
-                              className="mx-2 overflow-hidden text-overflow-ellipsis whitespace-nowrap"
-                            >
-                              {task.title}
-                            </li>
-                          );
-                        })}
-                        {showMore && (
-                          <li className="mx-2 text-center underline list-none">
-                            Show More
-                          </li>
-                        )}
-                      </ul>
-                    </>
+                    <MonthlyTableCell
+                      dayEvents={monthlyEventsByDay[nextDay]?.slice(0, 3)}
+                      dayNumber={nextDay}
+                      hasMoreThanThreeEvents={
+                        monthlyEventsByDay[nextDay]?.length > 3
+                      }
+                    />
                   )}
                 </td>
               );
