@@ -1,7 +1,8 @@
-import { Event } from '@/src/types';
+import { useEventModal } from '@/src/hooks/useEventModal/useEventModal';
+import { EventType } from '@/src/types';
 
 type MonthlyTableCellProps = {
-  dayEvents: Event[];
+  dayEvents: EventType[];
   dayNumber: number;
   hasMoreThanThreeEvents: boolean;
 };
@@ -11,6 +12,8 @@ const MonthlyTableCell: React.FC<MonthlyTableCellProps> = ({
   dayNumber,
   hasMoreThanThreeEvents,
 }) => {
+  const { openModal } = useEventModal();
+
   return (
     <>
       <p className="py-1 text-center">{dayNumber}</p>
@@ -20,6 +23,7 @@ const MonthlyTableCell: React.FC<MonthlyTableCellProps> = ({
             <li
               key={event.id}
               className="mx-2 overflow-hidden text-overflow-ellipsis whitespace-nowrap"
+              onClick={() => openModal(event)}
             >
               {event.title}
             </li>

@@ -1,6 +1,6 @@
 import { MonthType } from '@/src/types';
 import { useCallback, useEffect, useState } from 'react';
-import { Event } from '@/src/types';
+import { EventType } from '@/src/types';
 
 type useEventsProps = {
   month: MonthType;
@@ -8,10 +8,10 @@ type useEventsProps = {
 };
 
 type EventsByDayType = {
-  [day: string]: Event[];
+  [day: string]: EventType[];
 };
 
-const tasksLocal: Event[] = [
+const tasksLocal: EventType[] = [
   {
     id: '1',
     title: 'Interview with Factorial',
@@ -62,14 +62,14 @@ const tasksLocal: Event[] = [
     endDate: '2024-02-13',
   },
   {
-    id: '7',
+    id: '8',
     title: 'Studying for exams',
     description: 'gonna be tough one',
     startDate: '2024-02-08',
     endDate: '2024-02-14',
   },
   {
-    id: '7',
+    id: '9',
     title: 'Organising the apartment',
     description: 'Cleaning and putting stuff in place',
     startDate: '2024-02-10',
@@ -82,7 +82,7 @@ const useEvents = ({ month, year }: useEventsProps) => {
     {}
   );
 
-  const getEvents = useCallback(async (): Promise<Event[]> => {
+  const getEvents = useCallback(async (): Promise<EventType[]> => {
     // const response = await fetch(
     //   `http://localhost:4000/tasks?month=${month}&year=${year}`
     // );
@@ -91,7 +91,7 @@ const useEvents = ({ month, year }: useEventsProps) => {
     return data;
   }, [month, year]);
 
-  const formatEvents = (events: Event[]): EventsByDayType => {
+  const formatEvents = (events: EventType[]): EventsByDayType => {
     const eventsByDay: EventsByDayType = {};
 
     events.forEach((event) => {
@@ -106,7 +106,6 @@ const useEvents = ({ month, year }: useEventsProps) => {
         eventsByDay[i].push(event);
       }
     });
-    console.log({ eventsByDay });
     return eventsByDay;
   };
 

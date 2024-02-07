@@ -1,12 +1,15 @@
-import './App.css'
-import MonthlyView from './components/MonthlyView/MonthlyView'
+import './App.css';
+import MonthlyView from '@/src/components/MonthlyView/MonthlyView';
+import EventModal from '@/src/components/EventModal/EventModal';
+import { EventModalProvider } from './hooks/useEventModal/useEventProvider';
 
 function App() {
   return (
-    <main>
+    <EventModalProvider>
       <MonthlyView />
-    </main>
-  )
+      <EventModal />
+    </EventModalProvider>
+  );
 }
 
-export default App
+export default App;

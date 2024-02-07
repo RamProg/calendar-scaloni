@@ -3,13 +3,6 @@ import { MonthType } from '@/src/types';
 import { getDaysInMonth, getFirstDayOfTheMonth } from '@/src/utils/dates';
 import MonthlyTableCell from './MonthlyTableCell/MonthlyTableCell';
 
-const eventsInMonth = {
-  0: [{}, {}],
-  1: {},
-};
-
-eventsInMonth[0];
-
 type MonthlyTableBodyProps = {
   month: MonthType;
   year: number;
@@ -23,8 +16,6 @@ const MonthlyTableBody: React.FC<MonthlyTableBodyProps> = ({ month, year }) => {
     month,
     year,
   });
-
-  console.log({ monthlyEventsByDay });
 
   const startingDay = getFirstDayOfTheMonth(month, year);
   const lastDay: number = getDaysInMonth(month, year);
