@@ -4,8 +4,7 @@ import EventForm from './EventForm/EventForm';
 import { useEventModal } from '@/src/hooks/useEventModal/useEventModal';
 
 const EventModal: React.FC = () => {
-  const createOrEdit = 'create';
-  const { isOpen, closeModal, onSave } = useEventModal();
+  const { isOpen, closeModal, onSave, editOrAdd } = useEventModal();
 
   if (!isOpen) return null;
 
@@ -26,7 +25,7 @@ const EventModal: React.FC = () => {
           <div className="px-4 py-3 bg-gray-100 sm:px-6 sm:flex sm:flex-row-reverse">
             <Button
               onClick={() => onSave()}
-              label={createOrEdit === 'create' ? 'Create' : 'Save'}
+              label={editOrAdd === 'add' ? 'Create' : 'Save'}
               styles="ml-2"
             />
             <Button onClick={closeModal} label="Close" />

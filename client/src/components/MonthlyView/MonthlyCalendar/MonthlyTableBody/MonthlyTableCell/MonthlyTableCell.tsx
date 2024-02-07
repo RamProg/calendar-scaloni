@@ -1,5 +1,7 @@
 import { useEventModal } from '@/src/hooks/useEventModal/useEventModal';
 import { EventType } from '@/src/types';
+import DayEventsModal from './DayEventsModal/DayEventsModal';
+import { useState } from 'react';
 
 type MonthlyTableCellProps = {
   dayEvents: EventType[];
@@ -12,7 +14,11 @@ const MonthlyTableCell: React.FC<MonthlyTableCellProps> = ({
   dayNumber,
   hasMoreThanThreeEvents,
 }) => {
+  const [isDayEventsModalOpen, setIsDayEventsModalOpen] =
+    useState<boolean>(false);
   const { openModal } = useEventModal();
+
+  const date = dayNumber;
 
   return (
     <>
@@ -30,7 +36,21 @@ const MonthlyTableCell: React.FC<MonthlyTableCellProps> = ({
           );
         })}
         {hasMoreThanThreeEvents && (
-          <li className="mx-2 text-center underline list-none">Show More</li>
+          <>
+            <li
+              className="mx-2 text-center underline list-none"
+              onClick={() => setIsDayEventsModalOpen(true)}
+            >
+              Show More
+            </li>
+            {isDayEventsModalOpen && (
+              <DayEventsModal
+                date={`${date}`}
+                onClose={() => setIsDayEventsModalOpen(false)}
+                events={dayEvents}
+              />
+            )}
+          </>
         )}
       </ul>
     </>

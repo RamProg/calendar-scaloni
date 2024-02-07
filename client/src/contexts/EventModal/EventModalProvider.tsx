@@ -1,8 +1,9 @@
 import { ReactNode, useState } from 'react';
-import { EventModalContext } from './useEventContext';
+import { EventModalContext } from './EventModalContext';
 import { EventType } from '@/src/types';
 
-const emptyEventData = {
+const emptyEventData: EventType = {
+  id: '',
   title: '',
   description: '',
   startDate: '',
@@ -10,8 +11,8 @@ const emptyEventData = {
 };
 
 export const EventModalProvider = ({ children }: { children: ReactNode }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [editOrAdd, setEditOrAdd] = useState('add');
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [editOrAdd, setEditOrAdd] = useState<'add' | 'edit'>('add');
   const [eventData, setEventData] = useState(emptyEventData);
 
   const onSave = (id?: string) => {
