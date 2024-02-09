@@ -6,4 +6,4 @@ export const daysOfTheWeek = [
   'Thursday',
   'Friday',
   'Saturday',
-]
+];
