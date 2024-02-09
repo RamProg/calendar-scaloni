@@ -1,4 +1,5 @@
 import express, { json } from "express";
+import { eventRouter } from "./routes";
 import cors, { CorsOptions } from "cors";
 
 const CORS_OPTIONS: CorsOptions = {
@@ -13,6 +14,8 @@ export function createExpressApp() {
   app.use(express.urlencoded({ extended: true }));
   app.use(cors(CORS_OPTIONS));
   app.use(json());
+
+  app.use(eventRouter);
 
   app.get("/_health", (req, res) => {
     res.send("OK");

@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-export interface Event {
+export interface IEvent {
   title: string;
   description: string;
   startDate: Date;
