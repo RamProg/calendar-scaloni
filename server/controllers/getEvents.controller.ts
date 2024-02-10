@@ -1,13 +1,14 @@
 import { Request, Response } from "express";
 
 import Event from "../models/event.model";
+import { isValidMonth, isValidYear } from "../utils/validator";
 
 export const getAllEvents = async (req: Request, res: Response) => {
   try {
     const { month, year } = req.query;
     
-    if (!month || !year) {
-      return res.status(400).send({ message: "Month and year are required" });
+    if (!isValidMonth(month) || !isValidYear(year)) {
+      return res.status(400).send({ message: "Month or year are missing or invalid" });
     }
 
     const daysInMonth = new Date(Number(year), Number(month), 0).getDate();

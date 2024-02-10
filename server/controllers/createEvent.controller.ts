@@ -1,24 +1,25 @@
 import { Request, Response } from "express";
 
 import Event, { IEvent } from "../models/event.model";
-
-export type CreateEventPayload = {
-  title: IEvent["title"];
-  description: IEvent["description"];
-  startDate: IEvent["startDate"];
-  endDate: IEvent["endDate"];
-};
+import { findErrors } from "../utils/validator";
+import { createErrorMessage } from "../utils/errors";
 
 export const createEvent = async (req: Request, res: Response) => {
   try {
-    const { title, description, startDate, endDate }: CreateEventPayload =
-      req.body;
+    const { title, description, startDate, endDate }: IEvent = req.body;
 
-    if (!title || !description || !startDate || !endDate) {
-      return res.status(400).send({ message: "Missing required fields" });
+    const errors = findErrors({ title, description, startDate, endDate });
+    const isValid = errors.length === 0;
+
+    if (!isValid) {
+      const message = createErrorMessage(errors);
+      return res.status(400).send({ message });
     }
 
-    if (new Date(startDate) > new Date(endDate)) {
+    const parsedStartDate = new Date(startDate);
+    const parsedEndDate = new Date(endDate);
+
+    if (parsedStartDate > parsedEndDate) {
       return res
         .status(400)
         .send({ message: "End date must be after the start date" });
@@ -27,8 +28,8 @@ export const createEvent = async (req: Request, res: Response) => {
     const newEvent = await Event.create({
       title,
       description,
-      startDate,
-      endDate,
+      startDate: parsedStartDate,
+      endDate: parsedEndDate,
     });
 
     return res
