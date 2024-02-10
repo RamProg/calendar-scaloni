@@ -1,6 +1,8 @@
 import express, { json } from "express";
 import { eventRouter } from "./routes";
 import cors, { CorsOptions } from "cors";
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "./openapi.json";
 
 const CORS_OPTIONS: CorsOptions = {
   optionsSuccessStatus: 200,
@@ -14,6 +16,8 @@ export function createExpressApp() {
   app.use(express.urlencoded({ extended: true }));
   app.use(cors(CORS_OPTIONS));
   app.use(json());
+
+  app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
   app.use(eventRouter);
 

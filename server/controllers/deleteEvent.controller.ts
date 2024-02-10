@@ -19,8 +19,12 @@ export const deleteEvent = async (req: Request, res: Response) => {
         .send({ message: `Event with ID ${id} does not exist` });
     }
 
-    return res.status(200).send({ message: "The event has been deleted successfully", deletedEvent });
+    return res.status(200).send({
+      message: "The event has been deleted successfully",
+      deletedEvent,
+    });
   } catch (error) {
-    return res.status(500).send({ message: "Unexpected server error", error });
+    console.error({ error });
+    return res.status(500).send({ message: "Unexpected server error" });
   }
 };

@@ -36,6 +36,7 @@ export const getAllEvents = async (req: Request, res: Response) => {
 
     return res.status(200).json(events);
   } catch (error) {
-    return res.status(500).send({ message: "Unexpected server error", error });
+    console.error({ error });
+    return res.status(500).send({ message: "Unexpected server error" });
   }
 };

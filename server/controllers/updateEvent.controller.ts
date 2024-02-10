@@ -14,7 +14,7 @@ export const updateEvent = async (req: Request, res: Response) => {
     }
 
     const { title, description, startDate, endDate } = req.body;
-    
+
     const errors = findErrors({ title, description, startDate, endDate });
     const isValid = errors.length === 0;
 
@@ -46,6 +46,7 @@ export const updateEvent = async (req: Request, res: Response) => {
 
     return res.status(200).send(updatedEvent);
   } catch (error) {
-    return res.status(500).send({ message: "Unexpected server error", error });
+    console.error({ error });
+    return res.status(500).send({ message: "Unexpected server error" });
   }
 };
