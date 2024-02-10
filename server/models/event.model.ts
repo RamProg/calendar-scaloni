@@ -14,5 +14,4 @@ const EventSchema: Schema = new Schema({
   endDate: { type: Date, required: true },
 });
 
-// Export the model and return your IUser interface
-export default mongoose.model<Event & Document>("Event", EventSchema);
+export default mongoose.model<IEvent & Document>("Event", EventSchema);
