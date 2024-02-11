@@ -32,7 +32,7 @@ const MonthlyTableCell: React.FC<MonthlyTableCellProps> = ({
         {dayEvents?.slice(0, 3).map((event) => {
           return (
             <li
-              key={event.id}
+              key={`${event._id}-${day}`}
               className="mx-2 overflow-hidden text-overflow-ellipsis whitespace-nowrap"
               onClick={() => openModal(event)}
             >

@@ -17,12 +17,17 @@ const MonthlyTableBody: React.FC<MonthlyTableBodyProps> = ({ month, year }) => {
     year,
   });
 
-  console.log(monthlyEventsByDay);
-
   const startingDay = getFirstDayOfTheMonth(month, year);
   const lastDay: number = getDaysInMonth(month, year);
 
   let nextDay: number = 0;
+
+  const isToday = (today: number) => {
+    const date = new Date();
+    const compareDate = new Date(year, month - 1, today);
+
+    return date.toDateString() === compareDate.toDateString();
+  };
 
   return (
     <tbody>
@@ -41,10 +46,11 @@ const MonthlyTableBody: React.FC<MonthlyTableBodyProps> = ({ month, year }) => {
               return (
                 <td
                   key={`${i}-${j}`}
-                  className="overflow-hidden align-text-top border-t border-l border-gray-200 first:border-l-0"
+                  className={`overflow-hidden align-text-top border-t border-l border-gray-200 first:border-l-0 ${isToday(nextDay) && 'bg-blue-100'}`}
                 >
                   {nextDay > 0 && (
                     <MonthlyTableCell
+                      key={nextDay}
                       month={month}
                       year={year}
                       dayEvents={monthlyEventsByDay[nextDay]}

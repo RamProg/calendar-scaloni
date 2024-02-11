@@ -1,4 +1,4 @@
-import { EventType } from '@/src/types';
+import { EventErrorsType, EventType } from '@/src/types';
 import { createContext } from 'react';
 
 type EventModalContextType = {
@@ -8,13 +8,15 @@ type EventModalContextType = {
   onSave: (id?: string) => void;
   openModal: (data?: EventType) => void;
   closeModal: () => void;
+  onDelete: (id: string) => void;
+  errors: EventErrorsType;
   updateEventData: (data: Partial<EventType>) => void;
 };
 
 const defaultContextValue: EventModalContextType = {
   isOpen: false,
   eventData: {
-    id: '',
+    _id: '',
     title: '',
     description: '',
     startDate: '',
@@ -24,6 +26,13 @@ const defaultContextValue: EventModalContextType = {
   onSave: () => {},
   openModal: () => {},
   closeModal: () => {},
+  onDelete: () => {},
+  errors: {
+    title: false,
+    description: false,
+    startDate: false,
+    endDate: false,
+  },
   updateEventData: () => {},
 };
 

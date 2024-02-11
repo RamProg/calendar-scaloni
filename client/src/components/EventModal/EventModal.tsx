@@ -5,7 +5,9 @@ import { useEventModal } from '@/src/hooks/useEventModal/useEventModal';
 import ModalWrapper from '../ModalWrapper/ModalWrapper';
 
 const EventModal: React.FC = () => {
-  const { isOpen, closeModal, onSave, editOrAdd } = useEventModal();
+  const { isOpen, closeModal, onSave, onDelete, editOrAdd } = useEventModal();
+  const { eventData } = useEventModal();
+  const { _id } = eventData;
 
   if (!isOpen) return null;
 
@@ -13,10 +15,18 @@ const EventModal: React.FC = () => {
     <>
       <Button
         styleType="secondary"
-        onClick={() => onSave()}
+        onClick={() => onSave(_id)}
         label={editOrAdd === 'add' ? 'Create' : 'Save'}
         styles="ml-2"
       />
+      {editOrAdd === 'edit' && (
+        <Button
+          styleType="tertiary"
+          onClick={() => onDelete(_id)}
+          label={'Delete'}
+          styles="ml-2"
+        />
+      )}
       <Button onClick={closeModal} label="Close" />
     </>
   );

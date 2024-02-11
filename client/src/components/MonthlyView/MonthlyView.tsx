@@ -7,7 +7,8 @@ export type DateDirection =
   | 'nextMonth'
   | 'previousMonth'
   | 'previousYear'
-  | 'nextYear';
+  | 'nextYear'
+  | 'today';
 
 const currentMonth = new Date().getMonth() + 1;
 const currentYear = new Date().getFullYear();
@@ -18,6 +19,10 @@ const MonthlyView = () => {
 
   const onChangeDate = (dateDirection: DateDirection) => {
     switch (dateDirection) {
+      case 'today':
+        setMonth(currentMonth as MonthType);
+        setYear(currentYear);
+        break;
       case 'nextYear':
         setYear((prev) => prev + 1);
         break;

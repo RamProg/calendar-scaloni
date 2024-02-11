@@ -1,46 +1,49 @@
 import { useEventModal } from '@/src/hooks/useEventModal/useEventModal';
+import Input from '@/src/components/Input/Input';
 
 const EventForm = () => {
-  const { eventData, updateEventData } = useEventModal();
+  const { eventData, updateEventData, errors } = useEventModal();
   const { title, description, startDate, endDate } = eventData;
 
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    updateEventData({ [name]: value });
+  };
+
   return (
-    <form>
-      <label className="block">
-        Title
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => updateEventData({ title: e.target.value })}
-          className="block w-full mt-1"
-        />
-      </label>
-      <label className="block mt-4">
-        Description
-        <textarea
-          value={description}
-          onChange={(e) => updateEventData({ description: e.target.value })}
-          className="block w-full mt-1"
-        />
-      </label>
-      <label className="block mt-4">
-        Start Date
-        <input
-          type="date"
-          value={startDate}
-          onChange={(e) => updateEventData({ startDate: e.target.value })}
-          className="block w-full mt-1"
-        />
-      </label>
-      <label className="block mt-4">
-        End Date
-        <input
-          type="date"
-          value={endDate}
-          onChange={(e) => updateEventData({ endDate: e.target.value })}
-          className="block w-full mt-1"
-        />
-      </label>
+    <form id="event-form">
+      <Input
+        type="text"
+        name="title"
+        label="Title"
+        value={title}
+        onChange={onChange}
+        hasError={errors.title}
+      />
+      <Input
+        type="text"
+        name="description"
+        label="Description"
+        value={description}
+        onChange={onChange}
+        hasError={errors.description}
+      />
+      <Input
+        type="date"
+        name="startDate"
+        label="Start Date"
+        value={startDate}
+        onChange={onChange}
+        hasError={errors.startDate}
+      />
+      <Input
+        type="date"
+        name="endDate"
+        label="End Date"
+        value={endDate}
+        onChange={onChange}
+        hasError={errors.endDate}
+      />
     </form>
   );
 };

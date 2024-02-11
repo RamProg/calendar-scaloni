@@ -90,7 +90,6 @@ const useEvents = ({ month, year }: useEventsProps) => {
   };
 
   const addEvent = async (event: EventType): Promise<EventType> => {
-    console.log('event', event);
     const response = await fetch(SERVER_URL + '/event', {
       method: 'POST',
       headers: {
@@ -98,8 +97,19 @@ const useEvents = ({ month, year }: useEventsProps) => {
       },
       body: JSON.stringify(event),
     });
-    console.log('response', response);
-    console.log('error', response.status);
+
+    const data = await response.json();
+    return data;
+  };
+
+  const updateEvent = async (event: EventType): Promise<EventType> => {
+    const response = await fetch(SERVER_URL + '/event/' + event._id, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(event),
+    });
 
     const data = await response.json();
     return data;
@@ -110,23 +120,57 @@ const useEvents = ({ month, year }: useEventsProps) => {
     queryFn: getEvents,
   });
 
+  const deleteEvent = async (id: string) => {
+    const response = await fetch(SERVER_URL + '/event/' + id, {
+      method: 'DELETE',
+    });
+
+    const data = await response.json();
+    return data;
+  };
+
   const addEventMutation = useMutation({
     mutationFn: (newEvent: EventType) => addEvent(newEvent),
     onSuccess: () => {
       fetchEvents.refetch();
     },
     onError: (error) => {
-      console.log('error', error);
+      console.error('error', error);
+    },
+  });
+
+  const updateEventMutation = useMutation({
+    mutationFn: (newEvent: EventType) => updateEvent(newEvent),
+    onSuccess: () => {
+      fetchEvents.refetch();
+    },
+    onError: (error) => {
+      console.error('error', error);
+    },
+  });
+
+  const deleteEventMutation = useMutation({
+    mutationFn: (id: string) => deleteEvent(id),
+    onSuccess: () => {
+      fetchEvents.refetch();
+    },
+    onError: (error) => {
+      console.error('error', error);
     },
   });
 
   useEffect(() => {
     if (fetchEvents.data) {
-      setMonthlyEventsByDay(formatEvents(fetchEvents.data));
+      setMonthlyEventsByDay(formatEvents(fetchEvents.data, month, year));
     }
-  }, [fetchEvents.data]);
+  }, [fetchEvents.data, month, year]);
 
-  return { monthlyEventsByDay, addEventMutation };
+  return {
+    monthlyEventsByDay,
+    addEventMutation,
+    updateEventMutation,
+    deleteEventMutation,
+  };
 };
 
 export default useEvents;

@@ -20,7 +20,13 @@ const MonthlyNavBar: React.FC<MonthlyNavBar> = ({
 
   return (
     <nav className="flex justify-between p-2">
-      <div className="flex" />
+      <div className="flex items-center">
+        <Button
+          styleType="secondary"
+          onClick={() => onChangeDate('today')}
+          label={'Today'}
+        />
+      </div>
       <div className="flex">
         <div className="flex items-center">
           <Button
@@ -45,7 +51,11 @@ const MonthlyNavBar: React.FC<MonthlyNavBar> = ({
         </div>
       </div>
       <div className="flex items-center">
-        <Button styleType="secondary" onClick={() => openModal()} label={'+'} />
+        <Button
+          styleType="secondary"
+          onClick={() => openModal()}
+          label={'New'}
+        />
       </div>
     </nav>
   );
