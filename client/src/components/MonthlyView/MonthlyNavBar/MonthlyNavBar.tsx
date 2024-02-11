@@ -1,6 +1,7 @@
 import Button from '@/src/components/Button/Button';
 import { DateDirection } from '../MonthlyView';
 import { useEventModal } from '@/src/hooks/useEventModal/useEventModal';
+import { getMonthName } from '@/src/utils/dates';
 
 type MonthlyNavBar = {
   month: number;
@@ -14,11 +15,6 @@ const MonthlyNavBar: React.FC<MonthlyNavBar> = ({
   onChangeDate,
 }) => {
   const { openModal } = useEventModal();
-
-  const getMonthName = (monthNumber: number) => {
-    const date = new Date(2020, monthNumber - 1);
-    return date.toLocaleString('default', { month: 'long' });
-  };
 
   const monthString = getMonthName(month);
 
@@ -49,7 +45,7 @@ const MonthlyNavBar: React.FC<MonthlyNavBar> = ({
         </div>
       </div>
       <div className="flex items-center">
-        <Button onClick={() => openModal()} label={'+'} />
+        <Button styleType="secondary" onClick={() => openModal()} label={'+'} />
       </div>
     </nav>
   );

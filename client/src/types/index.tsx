@@ -7,3 +7,7 @@ export type EventType = {
   startDate: string;
   endDate: string;
 };
+
+export type EventsByDayType = {
+  [day: string]: EventType[];
+};

@@ -2,29 +2,34 @@ import { useEventModal } from '@/src/hooks/useEventModal/useEventModal';
 import { EventType } from '@/src/types';
 import DayEventsModal from './DayEventsModal/DayEventsModal';
 import { useState } from 'react';
+import { getMonthName } from '@/src/utils/dates';
 
 type MonthlyTableCellProps = {
   dayEvents: EventType[];
-  dayNumber: number;
+  day: number;
+  month: number;
+  year: number;
   hasMoreThanThreeEvents: boolean;
 };
 
 const MonthlyTableCell: React.FC<MonthlyTableCellProps> = ({
   dayEvents,
-  dayNumber,
+  month,
+  year,
+  day,
   hasMoreThanThreeEvents,
 }) => {
   const [isDayEventsModalOpen, setIsDayEventsModalOpen] =
     useState<boolean>(false);
   const { openModal } = useEventModal();
 
-  const date = dayNumber;
+  const date = `${day} ${getMonthName(month)} ${year}`;
 
   return (
     <>
-      <p className="py-1 text-center">{dayNumber}</p>
+      <p className="py-1 text-center">{day}</p>
       <ul className="h-1 list-disc list-inside">
-        {dayEvents?.map((event) => {
+        {dayEvents?.slice(0, 3).map((event) => {
           return (
             <li
               key={event.id}

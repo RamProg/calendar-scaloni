@@ -7,3 +7,5 @@ export const daysOfTheWeek = [
   'Friday',
   'Saturday',
 ];
+
+export const SERVER_URL = 'http://localhost:8000';

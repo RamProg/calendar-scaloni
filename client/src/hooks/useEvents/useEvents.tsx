@@ -1,14 +1,13 @@
-import { MonthType } from '@/src/types';
-import { useCallback, useEffect, useState } from 'react';
+import { EventsByDayType, MonthType } from '@/src/types';
+import { useEffect, useState } from 'react';
 import { EventType } from '@/src/types';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { formatEvents } from '@/src/utils/dates';
+import { SERVER_URL } from '@/src/constants';
 
 type useEventsProps = {
   month: MonthType;
   year: number;
-};
-
-type EventsByDayType = {
-  [day: string]: EventType[];
 };
 
 const tasksLocal: EventType[] = [
@@ -82,43 +81,52 @@ const useEvents = ({ month, year }: useEventsProps) => {
     {}
   );
 
-  const getEvents = useCallback(async (): Promise<EventType[]> => {
-    // const response = await fetch(
-    //   `http://localhost:4000/tasks?month=${month}&year=${year}`
-    // );
-    // const data = await response.json();
-    const data = await tasksLocal;
+  const getEvents = async (): Promise<EventType[]> => {
+    const response = await fetch(
+      `${SERVER_URL}/events?month=${month}&year=${year}`
+    );
+    const data = await response.json();
     return data;
-  }, [month, year]);
-
-  const formatEvents = (events: EventType[]): EventsByDayType => {
-    const eventsByDay: EventsByDayType = {};
-
-    events.forEach((event) => {
-      const startDate = Number(event.startDate.split('-')[2]);
-      const endDate = Number(event.endDate.split('-')[2]);
-
-      for (let i = startDate; i <= endDate; i++) {
-        if (!eventsByDay[i]) {
-          eventsByDay[i] = [];
-        }
-
-        eventsByDay[i].push(event);
-      }
-    });
-    return eventsByDay;
   };
 
+  const addEvent = async (event: EventType): Promise<EventType> => {
+    console.log('event', event);
+    const response = await fetch(SERVER_URL + '/event', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(event),
+    });
+    console.log('response', response);
+    console.log('error', response.status);
+
+    const data = await response.json();
+    return data;
+  };
+
+  const fetchEvents = useQuery({
+    queryKey: ['fetchEvents', month, year],
+    queryFn: getEvents,
+  });
+
+  const addEventMutation = useMutation({
+    mutationFn: (newEvent: EventType) => addEvent(newEvent),
+    onSuccess: () => {
+      fetchEvents.refetch();
+    },
+    onError: (error) => {
+      console.log('error', error);
+    },
+  });
+
   useEffect(() => {
-    const fetchEvents = async () => {
-      const events = await getEvents();
-      setMonthlyEventsByDay(formatEvents(events));
-    };
+    if (fetchEvents.data) {
+      setMonthlyEventsByDay(formatEvents(fetchEvents.data));
+    }
+  }, [fetchEvents.data]);
 
-    fetchEvents();
-  }, [getEvents, month, year]);
-
-  return { monthlyEventsByDay };
+  return { monthlyEventsByDay, addEventMutation };
 };
 
 export default useEvents;

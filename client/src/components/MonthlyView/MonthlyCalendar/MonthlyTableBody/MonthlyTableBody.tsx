@@ -17,6 +17,8 @@ const MonthlyTableBody: React.FC<MonthlyTableBodyProps> = ({ month, year }) => {
     year,
   });
 
+  console.log(monthlyEventsByDay);
+
   const startingDay = getFirstDayOfTheMonth(month, year);
   const lastDay: number = getDaysInMonth(month, year);
 
@@ -43,8 +45,10 @@ const MonthlyTableBody: React.FC<MonthlyTableBodyProps> = ({ month, year }) => {
                 >
                   {nextDay > 0 && (
                     <MonthlyTableCell
-                      dayEvents={monthlyEventsByDay[nextDay]?.slice(0, 3)}
-                      dayNumber={nextDay}
+                      month={month}
+                      year={year}
+                      dayEvents={monthlyEventsByDay[nextDay]}
+                      day={nextDay}
                       hasMoreThanThreeEvents={
                         monthlyEventsByDay[nextDay]?.length > 3
                       }

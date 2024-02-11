@@ -1,6 +1,7 @@
 import { ReactNode, useState } from 'react';
 import { EventModalContext } from './EventModalContext';
 import { EventType } from '@/src/types';
+import useEvents from '@/src/hooks/useEvents/useEvents';
 
 const emptyEventData: EventType = {
   id: '',
@@ -15,11 +16,13 @@ export const EventModalProvider = ({ children }: { children: ReactNode }) => {
   const [editOrAdd, setEditOrAdd] = useState<'add' | 'edit'>('add');
   const [eventData, setEventData] = useState(emptyEventData);
 
+  const { addEventMutation } = useEvents({ month: 2, year: 2024 });
+
   const onSave = (id?: string) => {
     if (id) {
       // update event
     } else {
-      // create event
+      addEventMutation.mutate(eventData);
     }
   };
 
