@@ -6,7 +6,7 @@
   "main": "eslint.config.js",
   "scripts": {
     "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm run dev\"",
-    "install": "cd server && npm i && cd ../client && npm i"
+    "setup": "npm i && cd server && npm i && cd ../client && npm i"
   },
   "keywords": [],
   "author": "",
