@@ -15,3 +15,7 @@ export type EventsByDayType = {
 export type EventErrorsType = {
   [value: string]: boolean;
 }
+export type ServerErrorsType = {
+  getData: boolean;
+  sendData: boolean;
+};

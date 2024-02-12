@@ -1,6 +1,11 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { EventModalContext } from './EventModalContext';
-import { EventErrorsType, EventType, MonthType } from '@/src/types';
+import {
+  EventErrorsType,
+  EventType,
+  MonthType,
+  ServerErrorsType,
+} from '@/src/types';
 import useEvents from '@/src/hooks/useEvents/useEvents';
 import { isValidText, isValidDate } from '@/src/utils/validator';
 import { currentMonth, currentYear } from '@/src/utils/dates';
@@ -20,17 +25,53 @@ const noErrors: EventErrorsType = {
   endDate: false,
 };
 
+const noServerErrors: ServerErrorsType = {
+  getData: false,
+  sendData: false,
+};
+
 export const EventModalProvider = ({ children }: { children: ReactNode }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [editOrAdd, setEditOrAdd] = useState<'add' | 'edit'>('add');
   const [eventData, setEventData] = useState(emptyEventData);
   const [errors, setErrors] = useState(noErrors);
+  const [serverErrors, setServerErrors] =
+    useState<ServerErrorsType>(noServerErrors);
 
   const { addEventMutation, updateEventMutation, deleteEventMutation } =
     useEvents({
       month: currentMonth as MonthType,
       year: currentYear,
     });
+
+  useEffect(() => {
+    if (
+      addEventMutation.error ||
+      updateEventMutation.error ||
+      deleteEventMutation.error
+    ) {
+      setServerErrors((prev) => ({ ...prev, sendData: true }));
+    }
+  }, [
+    addEventMutation.error,
+    deleteEventMutation.error,
+    updateEventMutation.error,
+  ]);
+
+  useEffect(() => {
+    if (
+      addEventMutation.isSuccess ||
+      updateEventMutation.isSuccess ||
+      deleteEventMutation.isSuccess
+    ) {
+      setServerErrors((prev) => ({ ...prev, sendData: false }));
+      closeModal();
+    }
+  }, [
+    addEventMutation.isSuccess,
+    deleteEventMutation.isSuccess,
+    updateEventMutation.isSuccess,
+  ]);
 
   const validate = () => {
     const newErrors = {
@@ -61,7 +102,6 @@ export const EventModalProvider = ({ children }: { children: ReactNode }) => {
     } else {
       addEventMutation.mutate(data);
     }
-    closeModal();
   };
 
   const updateEventData = (data: Partial<EventType>) => {
@@ -86,7 +126,6 @@ export const EventModalProvider = ({ children }: { children: ReactNode }) => {
 
   const onDelete = (id: string) => {
     deleteEventMutation.mutate(id);
-    closeModal();
   };
 
   const closeModal = () => {
@@ -105,6 +144,8 @@ export const EventModalProvider = ({ children }: { children: ReactNode }) => {
         editOrAdd,
         onDelete,
         errors,
+        serverErrors,
+        setServerErrors,
       }}
     >
       {children}

@@ -1,4 +1,4 @@
-import { EventErrorsType, EventType } from '@/src/types';
+import { EventErrorsType, EventType, ServerErrorsType } from '@/src/types';
 import { createContext } from 'react';
 
 type EventModalContextType = {
@@ -10,6 +10,8 @@ type EventModalContextType = {
   closeModal: () => void;
   onDelete: (id: string) => void;
   errors: EventErrorsType;
+  serverErrors: ServerErrorsType;
+  setServerErrors: React.Dispatch<React.SetStateAction<ServerErrorsType>>
   updateEventData: (data: Partial<EventType>) => void;
 };
 
@@ -33,6 +35,11 @@ const defaultContextValue: EventModalContextType = {
     startDate: false,
     endDate: false,
   },
+  serverErrors: {
+    getData: false,
+    sendData: false,
+  },
+  setServerErrors: () => {},
   updateEventData: () => {},
 };
 

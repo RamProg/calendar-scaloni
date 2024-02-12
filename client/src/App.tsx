@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
 
-function App() {
+const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <EventModalProvider>
@@ -15,6 +15,6 @@ function App() {
       </EventModalProvider>
     </QueryClientProvider>
   );
-}
+};
 
 export default App;
