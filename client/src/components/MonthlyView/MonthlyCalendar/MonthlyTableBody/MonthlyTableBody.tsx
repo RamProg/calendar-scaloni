@@ -46,7 +46,7 @@ const MonthlyTableBody: React.FC<MonthlyTableBodyProps> = ({ month, year }) => {
               return (
                 <td
                   key={`${i}-${j}`}
-                  className={`overflow-hidden align-text-top border-t border-l border-gray-200 first:border-l-0 ${isToday(nextDay) && 'bg-blue-100'}`}
+                  className={`overflow-hidden align-text-top border-t border-l border-gray-200 first:border-l-0 ${isToday(nextDay) && 'bg-blue-100'} hover:bg-pink-50`}
                 >
                   {nextDay > 0 && (
                     <MonthlyTableCell

@@ -2,6 +2,7 @@ import Button from '@/src/components/Button/Button';
 import { DateDirection } from '../MonthlyView';
 import { useEventModal } from '@/src/hooks/useEventModal/useEventModal';
 import { getMonthName } from '@/src/utils/dates';
+import { isMobile } from 'react-device-detect';
 
 type MonthlyNavBar = {
   month: number;
@@ -22,6 +23,11 @@ const MonthlyNavBar: React.FC<MonthlyNavBar> = ({
 
   return (
     <nav>
+      {isMobile && (
+        <h1 className="m-2 text-4xl text-center">
+          {monthString} {year}
+        </h1>
+      )}
       <div className="flex justify-between p-2">
         <div className="flex items-center">
           <Button
@@ -40,9 +46,11 @@ const MonthlyNavBar: React.FC<MonthlyNavBar> = ({
             <Button onClick={() => onChangeDate('previousMonth')} label={'<'} />
           </div>
           <div>
-            <h1 className="m-2 text-4xl text-center w-72">
-              {monthString} {year}
-            </h1>
+            {!isMobile ? (
+              <h1 className="m-2 text-4xl text-center w-72">
+                {monthString} {year}
+              </h1>
+            ): <div className="w-10"/>}
           </div>
           <div className="flex items-center">
             <Button

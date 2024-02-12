@@ -3,6 +3,7 @@ import { EventType } from '@/src/types';
 import DayEventsModal from './DayEventsModal/DayEventsModal';
 import { useState } from 'react';
 import { getMonthName } from '@/src/utils/dates';
+import { isDesktop } from 'react-device-detect';
 
 type MonthlyTableCellProps = {
   dayEvents: EventType[];
@@ -33,7 +34,7 @@ const MonthlyTableCell: React.FC<MonthlyTableCellProps> = ({
           return (
             <li
               key={`${event._id}-${day}`}
-              className="mx-2 overflow-hidden text-overflow-ellipsis whitespace-nowrap"
+              className="mx-[2px] overflow-hidden text-sm list-none sm:mx-2 text-overflow-ellipsis whitespace-nowrap sm:text-base mb-1 sm:mb-1"
               onClick={() => openModal(event)}
             >
               {event.title}
@@ -43,10 +44,10 @@ const MonthlyTableCell: React.FC<MonthlyTableCellProps> = ({
         {hasMoreThanThreeEvents && (
           <>
             <li
-              className="mx-2 text-center underline list-none"
+              className="mx-2 mb-1 text-center underline list-none sm:mx-2 text-overflow-ellipsis whitespace-nowrap sm:text-base sm:mb-1 hover:cursor-pointer hover:text-blue-500"
               onClick={() => setIsDayEventsModalOpen(true)}
             >
-              Show More
+              {isDesktop && 'Show '}More
             </li>
             {isDayEventsModalOpen && (
               <DayEventsModal

@@ -14,14 +14,14 @@ const Input: React.FC<InputProps> = ({
 }) => {
   return (
     <>
-      <label className="block" id={name}>
+      <label className="block mb-4 text-2xl font-bold sm:text-xl" id={name}>
         {label}
         <input
           name={name}
           type={type}
           value={value}
           onChange={onChange}
-          className="block w-full mt-1"
+          className="block w-full p-2 mt-1 font-normal h-14 sm:h-10"
         />
         {hasError && (
           <span className="text-red-500">

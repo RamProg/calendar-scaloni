@@ -3,6 +3,7 @@ import Button from '@/src/components/Button/Button';
 import EventForm from './EventForm/EventForm';
 import { useEventModal } from '@/src/hooks/useEventModal/useEventModal';
 import ModalWrapper from '../ModalWrapper/ModalWrapper';
+import { isMobile } from 'react-device-detect';
 
 const EventModal: React.FC = () => {
   const { isOpen, closeModal, onSave, onDelete, editOrAdd } = useEventModal();
@@ -17,17 +18,19 @@ const EventModal: React.FC = () => {
         styleType="secondary"
         onClick={() => onSave(_id)}
         label={editOrAdd === 'add' ? 'Create' : 'Save'}
-        styles="ml-2"
+        big={true}
+        styles={isMobile ? 'mr-2' : 'ml-2'}
       />
       {editOrAdd === 'edit' && (
         <Button
           styleType="tertiary"
           onClick={() => onDelete(_id)}
           label={'Delete'}
-          styles="ml-2"
+          big={true}
+          styles={isMobile ? 'mr-2' : 'ml-2'}
         />
       )}
-      <Button onClick={closeModal} label="Close" />
+      <Button onClick={closeModal} big={true} label="Close" />
     </>
   );
 

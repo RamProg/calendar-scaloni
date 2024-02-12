@@ -3,6 +3,7 @@ import { ButtonHTMLAttributes } from 'react';
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
   styleType?: 'primary' | 'secondary' | 'tertiary';
+  big?: boolean;
   styles?: string;
 }
 
@@ -10,6 +11,7 @@ const Button: React.FC<ButtonProps> = ({
   label,
   styleType,
   styles,
+  big,
   ...props
 }) => {
   const getStyleString = (styleType: string) => {
@@ -28,7 +30,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
-      className={`p-2 rounded-lg font-sans font-medium transition-colors border ${styleString}} ${styles}`}
+      className={`p-2 rounded-lg font-sans font-medium transition-colors border ${styleString}} ${big && 'text-xl p-3'} ${styles}`}
       {...props}
     >
       {label}

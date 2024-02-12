@@ -21,7 +21,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
           onClick={onClose}
         />
       </div>
-      <div className="inline-block overflow-hidden text-left align-bottom transition-all transform bg-gray-100 rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+      <div className="inline-block w-[85%] overflow-hidden text-left align-bottom transition-all transform bg-gray-100 rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full ">
         {children}
         <div className="flex flex-row justify-between px-6 py-3">
           {serverErrors.sendData ? (
