@@ -1,31 +1,26 @@
-import { useEventModal } from '@/src/hooks/useEventModal/useEventModal';
 import { EventType } from '@/src/types';
-import DayEventsModal from './DayEventsModal/DayEventsModal';
-import { useState } from 'react';
-import { getMonthName } from '@/src/utils/dates';
+import DayEventsModalContainer from './DayEventsModalContainer/DayEventsModalContainer';
 import { isDesktop } from 'react-device-detect';
 
 type MonthlyTableCellProps = {
   dayEvents: EventType[];
   day: number;
-  month: number;
-  year: number;
   hasMoreThanThreeEvents: boolean;
+  date: string;
+  openModal: (event: EventType) => void;
+  isDayEventsModalOpen: boolean;
+  setIsDayEventsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const MonthlyTableCell: React.FC<MonthlyTableCellProps> = ({
   dayEvents,
-  month,
-  year,
   day,
   hasMoreThanThreeEvents,
+  date,
+  openModal,
+  isDayEventsModalOpen,
+  setIsDayEventsModalOpen,
 }) => {
-  const [isDayEventsModalOpen, setIsDayEventsModalOpen] =
-    useState<boolean>(false);
-  const { openModal } = useEventModal();
-
-  const date = `${day} ${getMonthName(month)} ${year}`;
-
   return (
     <>
       <p className="py-1 text-center">{day}</p>
@@ -50,7 +45,7 @@ const MonthlyTableCell: React.FC<MonthlyTableCellProps> = ({
               {isDesktop && 'Show '}More
             </li>
             {isDayEventsModalOpen && (
-              <DayEventsModal
+              <DayEventsModalContainer
                 date={`${date}`}
                 onClose={() => setIsDayEventsModalOpen(false)}
                 events={dayEvents}

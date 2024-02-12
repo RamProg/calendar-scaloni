@@ -1,34 +1,29 @@
-import useEvents from '@/src/hooks/useEvents/useEvents';
-import { MonthType } from '@/src/types';
-import { getDaysInMonth, getFirstDayOfTheMonth } from '@/src/utils/dates';
-import MonthlyTableCell from './MonthlyTableCell/MonthlyTableCell';
+import { EventsByDayType, MonthType } from '@/src/types';
+import MonthlyTableCellContainer from '../MonthlyTableCellContainer/MonthlyTableCellContainer';
 
 type MonthlyTableBodyProps = {
   month: MonthType;
   year: number;
+  startingDay: number;
+  lastDay: number;
+  isToday: (today: number) => boolean;
+  nextDay: number;
+  columns: unknown[];
+  rows: unknown[];
+  monthlyEventsByDay: EventsByDayType;
 };
 
-const rows = new Array(5).fill(null);
-const columns = new Array(7).fill(null);
-
-const MonthlyTableBody: React.FC<MonthlyTableBodyProps> = ({ month, year }) => {
-  const { monthlyEventsByDay } = useEvents({
-    month,
-    year,
-  });
-
-  const startingDay = getFirstDayOfTheMonth(month, year);
-  const lastDay: number = getDaysInMonth(month, year);
-
-  let nextDay: number = 0;
-
-  const isToday = (today: number) => {
-    const date = new Date();
-    const compareDate = new Date(year, month - 1, today);
-
-    return date.toDateString() === compareDate.toDateString();
-  };
-
+const MonthlyTableBody: React.FC<MonthlyTableBodyProps> = ({
+  month,
+  year,
+  nextDay,
+  startingDay,
+  lastDay,
+  isToday,
+  columns,
+  rows,
+  monthlyEventsByDay,
+}) => {
   return (
     <tbody>
       {rows.map((_, i) => {
@@ -49,7 +44,7 @@ const MonthlyTableBody: React.FC<MonthlyTableBodyProps> = ({ month, year }) => {
                   className={`overflow-hidden align-text-top border-t border-l border-gray-200 first:border-l-0 ${isToday(nextDay) && 'bg-blue-100'} hover:bg-pink-50`}
                 >
                   {nextDay > 0 && (
-                    <MonthlyTableCell
+                    <MonthlyTableCellContainer
                       key={nextDay}
                       month={month}
                       year={year}

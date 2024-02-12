@@ -1,30 +1,21 @@
-import Button from '@/src/components/common/Button/Button';
 import ModalWrapper from '@/src/components/common/ModalWrapper/ModalWrapper';
-import { useEventModal } from '@/src/hooks/useEventModal/useEventModal';
 import { EventType } from '@/src/types';
 
 type DayEventsModalProps = {
   date: string;
   events: EventType[];
   onClose: () => void;
+  footer: React.ReactNode;
+  openEventModal: (event: EventType) => void;
 };
 
 const DayEventsModal: React.FC<DayEventsModalProps> = ({
-  date,
+  footer,
+  openEventModal,
   events,
   onClose,
+  date,
 }) => {
-  const { openModal } = useEventModal();
-
-  const openEventModal = (event: EventType) => {
-    onClose();
-    openModal(event);
-  };
-
-  const footer: React.ReactNode = (
-    <Button label="Close" onClick={onClose} big={true} />
-  );
-
   return (
     <ModalWrapper onClose={onClose} footer={footer}>
       <div className="px-4 pt-5 pb-4 bg-gray-100 sm:p-6 sm:pb-4">

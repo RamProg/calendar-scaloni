@@ -19,3 +19,10 @@ export type ServerErrorsType = {
   getData: boolean;
   sendData: boolean;
 };
+
+export type DateDirection =
+  | 'nextMonth'
+  | 'previousMonth'
+  | 'previousYear'
+  | 'nextYear'
+  | 'today';

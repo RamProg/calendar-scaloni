@@ -1,6 +1,6 @@
 import Button from '@/src/components/common/Button/Button';
+import { DateDirection } from '@/src/types';
 import { isMobile } from 'react-device-detect';
-import { DateDirection } from '@/src/components/MonthlyView/MonthlyView';
 
 type MonthlyNavBarProps = {
   openModal: () => void;

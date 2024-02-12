@@ -1,19 +1,11 @@
 import { useState } from 'react';
-import MonthlyNavBar from './MonthlyNavBar/MonthlyNavBarContainer';
-import MonthlyCalendar from './MonthlyCalendar/MonthlyCalendar';
-import { MonthType } from '@/src/types';
-
-export type DateDirection =
-  | 'nextMonth'
-  | 'previousMonth'
-  | 'previousYear'
-  | 'nextYear'
-  | 'today';
+import { DateDirection, MonthType } from '@/src/types';
+import MonthlyView from './MonthlyView/MonthlyView';
 
 const currentMonth = new Date().getMonth() + 1;
 const currentYear = new Date().getFullYear();
 
-const MonthlyView = () => {
+const MonthlyViewContainer: React.FC = () => {
   const [month, setMonth] = useState<MonthType>(currentMonth as MonthType);
   const [year, setYear] = useState<number>(currentYear);
 
@@ -48,12 +40,7 @@ const MonthlyView = () => {
     }
   };
 
-  return (
-    <div className="flex flex-col w-screen h-screen p-4">
-      <MonthlyNavBar month={month} year={year} onChangeDate={onChangeDate} />
-      <MonthlyCalendar month={month} year={year} />
-    </div>
-  );
+  return <MonthlyView onChangeDate={onChangeDate} month={month} year={year} />;
 };
 
-export default MonthlyView;
+export default MonthlyViewContainer;

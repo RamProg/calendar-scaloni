@@ -1,7 +1,7 @@
-import { DateDirection } from '../MonthlyView';
 import { useEventModal } from '@/src/hooks/useEventModal/useEventModal';
 import { getMonthName } from '@/src/utils/dates';
 import MonthlyNavBar from './MontlyNavBar/MonthlyNavBar';
+import { DateDirection } from '@/src/types';
 
 type MonthlyNavBarContainerProps = {
   month: number;
