@@ -44,9 +44,7 @@
                     }
                   },
                   "additionalProperties": false,
-                  "required": [
-                    "events"
-                  ]
+                  "required": ["events"]
                 }
               }
             }
@@ -63,9 +61,7 @@
                     }
                   },
                   "additionalProperties": false,
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             }
@@ -79,15 +75,11 @@
                   "properties": {
                     "message": {
                       "type": "string",
-                      "enum": [
-                        "Unexpected server error"
-                      ]
+                      "enum": ["Unexpected server error"]
                     }
                   },
                   "additionalProperties": false,
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             }
@@ -124,12 +116,7 @@
                   }
                 },
                 "additionalProperties": false,
-                "required": [
-                  "description",
-                  "endDate",
-                  "startDate",
-                  "title"
-                ]
+                "required": ["description", "endDate", "startDate", "title"]
               }
             }
           }
@@ -144,19 +131,14 @@
                   "properties": {
                     "message": {
                       "type": "string",
-                      "enum": [
-                        "Event successfully created"
-                      ]
+                      "enum": ["Event successfully created"]
                     },
                     "data": {
                       "$ref": "#/components/schemas/IEventWithID"
                     }
                   },
                   "additionalProperties": false,
-                  "required": [
-                    "data",
-                    "message"
-                  ]
+                  "required": ["data", "message"]
                 }
               }
             }
@@ -173,9 +155,7 @@
                     }
                   },
                   "additionalProperties": false,
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             }
@@ -189,15 +169,11 @@
                   "properties": {
                     "message": {
                       "type": "string",
-                      "enum": [
-                        "Failed to create event"
-                      ]
+                      "enum": ["Failed to create event"]
                     }
                   },
                   "additionalProperties": false,
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             }
@@ -233,9 +209,7 @@
                     }
                   },
                   "additionalProperties": false,
-                  "required": [
-                    "updatedEvent"
-                  ]
+                  "required": ["updatedEvent"]
                 }
               }
             }
@@ -252,9 +226,7 @@
                     }
                   },
                   "additionalProperties": false,
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             }
@@ -268,15 +240,11 @@
                   "properties": {
                     "message": {
                       "type": "string",
-                      "enum": [
-                        "Unexpected server error"
-                      ]
+                      "enum": ["Unexpected server error"]
                     }
                   },
                   "additionalProperties": false,
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             }
@@ -310,9 +278,7 @@
                     }
                   },
                   "additionalProperties": false,
-                  "required": [
-                    "updatedEvent"
-                  ]
+                  "required": ["updatedEvent"]
                 }
               }
             }
@@ -329,9 +295,7 @@
                     }
                   },
                   "additionalProperties": false,
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             }
@@ -345,15 +309,11 @@
                   "properties": {
                     "message": {
                       "type": "string",
-                      "enum": [
-                        "Unexpected server error"
-                      ]
+                      "enum": ["Unexpected server error"]
                     }
                   },
                   "additionalProperties": false,
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             }
@@ -386,13 +346,7 @@
           }
         },
         "additionalProperties": false,
-        "required": [
-          "_id",
-          "description",
-          "endDate",
-          "startDate",
-          "title"
-        ]
+        "required": ["_id", "description", "endDate", "startDate", "title"]
       },
       "IEvent": {
         "type": "object",
@@ -413,12 +367,7 @@
           }
         },
         "additionalProperties": false,
-        "required": [
-          "description",
-          "endDate",
-          "startDate",
-          "title"
-        ]
+        "required": ["description", "endDate", "startDate", "title"]
       }
     }
   }

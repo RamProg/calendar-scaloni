@@ -1,16 +1,16 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 
-import Event from "../models/event.model";
-import { ObjectId } from "mongodb";
-import { findErrors } from "../utils/validator";
-import { createErrorMessage } from "../utils/errors";
+import Event from '../models/event.model';
+import { ObjectId } from 'mongodb';
+import { findErrors } from '../utils/validator';
+import { createErrorMessage } from '../utils/errors';
 
 export const updateEvent = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 
     if (!ObjectId.isValid(id)) {
-      return res.status(400).send({ message: "Invalid ID" });
+      return res.status(400).send({ message: 'Invalid ID' });
     }
 
     const { title, description, startDate, endDate } = req.body;
@@ -29,7 +29,7 @@ export const updateEvent = async (req: Request, res: Response) => {
     if (parsedStartDate > parsedEndDate) {
       return res
         .status(400)
-        .send({ message: "End date must be after the start date" });
+        .send({ message: 'End date must be after the start date' });
     }
 
     const updatedEvent = await Event.findOneAndUpdate(
@@ -47,6 +47,6 @@ export const updateEvent = async (req: Request, res: Response) => {
     return res.status(200).send(updatedEvent);
   } catch (error) {
     console.error({ error });
-    return res.status(500).send({ message: "Unexpected server error" });
+    return res.status(500).send({ message: 'Unexpected server error' });
   }
 };

@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IEvent {
   title: string;
@@ -14,4 +14,4 @@ const EventSchema: Schema = new Schema({
   endDate: { type: Date, required: true },
 });
 
-export default mongoose.model<IEvent & Document>("Event", EventSchema);
+export default mongoose.model<IEvent & Document>('Event', EventSchema);

@@ -1,4 +1,4 @@
-import { IEvent } from "../models/event.model";
+import { IEvent } from '../models/event.model';
 
 export const findErrors = (event: IEvent): string[] => {
   const { title, description, startDate, endDate } = event;
@@ -6,18 +6,18 @@ export const findErrors = (event: IEvent): string[] => {
   const errors: string[] = [];
 
   if (!isValidString(title)) {
-    errors.push("title");
+    errors.push('title');
   }
 
   if (!isValidString(description)) {
-    errors.push("description");
+    errors.push('description');
   }
 
   if (!isValidISODateString(startDate)) {
-    errors.push("startDate");
+    errors.push('startDate');
   }
   if (!isValidISODateString(endDate)) {
-    errors.push("endDate");
+    errors.push('endDate');
   }
 
   return errors;
@@ -38,7 +38,7 @@ const isValidISODateString = (value: unknown) => {
 };
 
 const isValidString = (value: unknown) => {
-  return value && typeof value === "string" && value.trim() !== "";
+  return value && typeof value === 'string' && value.trim() !== '';
 };
 
 export const isValidMonth = (value: unknown) => {
@@ -49,7 +49,7 @@ export const isValidMonth = (value: unknown) => {
   const month = Number(stringValue);
 
   return month >= 1 && month <= 12;
-}
+};
 
 export const isValidYear = (value: unknown) => {
   if (!isValidString(value)) return false;
@@ -59,4 +59,4 @@ export const isValidYear = (value: unknown) => {
   const year = Number(stringValue);
 
   return year >= 1900 && year <= 2200;
-}
+};

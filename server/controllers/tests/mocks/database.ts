@@ -1,6 +1,6 @@
-import { MongoMemoryServer } from "mongodb-memory-server";
-import mongoose, { Document } from "mongoose";
-import Event, { IEvent } from "../../../models/event.model";
+import { MongoMemoryServer } from 'mongodb-memory-server';
+import mongoose, { Document } from 'mongoose';
+import Event, { IEvent } from '../../../models/event.model';
 
 const mongod = MongoMemoryServer.create();
 

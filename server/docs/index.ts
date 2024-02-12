@@ -1,5 +1,5 @@
-import { Tspec } from "tspec";
-import { IEvent } from "../models/event.model";
+import { Tspec } from 'tspec';
+import { IEvent } from '../models/event.model';
 
 interface IEventWithID extends IEvent {
   _id: string;
@@ -11,45 +11,45 @@ export type CalendarApiSpec = Tspec.DefineApiSpec<{
     IEventWithID: IEventWithID;
   };
   paths: {
-    "/events": {
+    '/events': {
       get: {
-        summary: "Get all events for a given month and year";
+        summary: 'Get all events for a given month and year';
         query: { month: string; year: string };
         responses: {
           200: { events: IEventWithID[] };
           400: { message: string };
-          500: { message: "Unexpected server error" };
+          500: { message: 'Unexpected server error' };
         };
       };
     };
-    "/event": {
+    '/event': {
       post: {
-        summary: "Create a new event";
+        summary: 'Create a new event';
         body: IEvent;
         responses: {
-          201: { message: "Event successfully created"; data: IEventWithID };
+          201: { message: 'Event successfully created'; data: IEventWithID };
           400: { message: string };
-          500: { message: "Failed to create event" };
+          500: { message: 'Failed to create event' };
         };
       };
     };
-    "/event/{id}": {
+    '/event/{id}': {
       put: {
-        summary: "Update an event";
+        summary: 'Update an event';
         path: { id: number };
         responses: {
           200: { updatedEvent: IEventWithID };
           400: { message: string };
-          500: { message: "Unexpected server error" };
+          500: { message: 'Unexpected server error' };
         };
       };
       delete: {
-        summary: "Update an event";
+        summary: 'Update an event';
         path: { id: number };
         responses: {
           200: { updatedEvent: IEventWithID };
           400: { message: string };
-          500: { message: "Unexpected server error" };
+          500: { message: 'Unexpected server error' };
         };
       };
     };

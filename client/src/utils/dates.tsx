@@ -40,8 +40,7 @@ export const formatEvents = (
     let beginDay = startDay;
     let finishDay = endDay;
 
-    const endsInFollowingMonth =
-      endMonth > viewedMonth || endYear > viewedYear;
+    const endsInFollowingMonth = endMonth > viewedMonth || endYear > viewedYear;
     const startsInPreviousMonth =
       startMonth < viewedMonth || startYear < viewedYear;
 

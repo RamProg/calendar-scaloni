@@ -1,4 +1,4 @@
-import Button from '@/src/components/Button/Button';
+import Button from '@/src/components/common/Button/Button';
 import { DateDirection } from '../MonthlyView';
 import { useEventModal } from '@/src/hooks/useEventModal/useEventModal';
 import { getMonthName } from '@/src/utils/dates';
@@ -50,7 +50,9 @@ const MonthlyNavBar: React.FC<MonthlyNavBar> = ({
               <h1 className="m-2 text-4xl text-center w-72">
                 {monthString} {year}
               </h1>
-            ): <div className="w-5"/>}
+            ) : (
+              <div className="w-5" />
+            )}
           </div>
           <div className="flex items-center">
             <Button

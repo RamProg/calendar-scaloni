@@ -11,7 +11,7 @@ type EventModalContextType = {
   onDelete: (id: string) => void;
   errors: EventErrorsType;
   serverErrors: ServerErrorsType;
-  setServerErrors: React.Dispatch<React.SetStateAction<ServerErrorsType>>
+  setServerErrors: React.Dispatch<React.SetStateAction<ServerErrorsType>>;
   updateEventData: (data: Partial<EventType>) => void;
 };
 

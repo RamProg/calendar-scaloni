@@ -1,14 +1,16 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 
-import Event from "../models/event.model";
-import { isValidMonth, isValidYear } from "../utils/validator";
+import Event from '../models/event.model';
+import { isValidMonth, isValidYear } from '../utils/validator';
 
 export const getAllEvents = async (req: Request, res: Response) => {
   try {
     const { month, year } = req.query;
-    
+
     if (!isValidMonth(month) || !isValidYear(year)) {
-      return res.status(400).send({ message: "Month or year are missing or invalid" });
+      return res
+        .status(400)
+        .send({ message: 'Month or year are missing or invalid' });
     }
 
     const daysInMonth = new Date(Number(year), Number(month), 0).getDate();
@@ -37,6 +39,6 @@ export const getAllEvents = async (req: Request, res: Response) => {
     return res.status(200).json(events);
   } catch (error) {
     console.error({ error });
-    return res.status(500).send({ message: "Unexpected server error" });
+    return res.status(500).send({ message: 'Unexpected server error' });
   }
 };

@@ -77,7 +77,9 @@ export const EventModalProvider = ({ children }: { children: ReactNode }) => {
       title: !isValidText(eventData.title),
       description: !isValidText(eventData.description),
       startDate: !isValidDate(eventData.startDate),
-      endDate: !isValidDate(eventData.endDate) || eventData.endDate < eventData.startDate,
+      endDate:
+        !isValidDate(eventData.endDate) ||
+        eventData.endDate < eventData.startDate,
     };
 
     setErrors(newErrors);

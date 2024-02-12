@@ -1,6 +1,6 @@
 import './App.css';
 import MonthlyView from '@/src/components/MonthlyView/MonthlyView';
-import EventModal from '@/src/components/EventModal/EventModal';
+import EventModalContainer from '@/src/components/EventModalContainer/EventModalContainer';
 import { EventModalProvider } from '@/src/contexts/EventModal/EventModalProvider';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
@@ -11,7 +11,7 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <EventModalProvider>
         <MonthlyView />
-        <EventModal />
+        <EventModalContainer />
       </EventModalProvider>
     </QueryClientProvider>
   );

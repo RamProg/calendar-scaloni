@@ -1,5 +1,5 @@
 import { useEventModal } from '@/src/hooks/useEventModal/useEventModal';
-import Input from '@/src/components/Input/Input';
+import EventForm from './EventForm/EventForm';
 
 const inputs = [
   { type: 'text', name: 'title', label: 'Title' },
@@ -8,7 +8,7 @@ const inputs = [
   { type: 'date', name: 'endDate', label: 'End Date' },
 ];
 
-const EventForm = () => {
+const EventFormContainer: React.FC = () => {
   const { eventData, updateEventData, errors } = useEventModal();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,20 +17,8 @@ const EventForm = () => {
   };
 
   return (
-    <form id="event-form">
-      {inputs.map((input) => (
-        <Input
-          key={input.name}
-          type={input.type}
-          name={input.name}
-          label={input.label}
-          value={eventData[input.name as keyof typeof eventData]}
-          onChange={onChange}
-          hasError={errors[input.name]}
-        />
-      ))}
-    </form>
+    <EventForm eventData={eventData} onChange={onChange} errors={errors} inputs={inputs}/>
   );
 };
 
-export default EventForm;
+export default EventFormContainer;

@@ -1,8 +1,8 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 
-import Event, { IEvent } from "../models/event.model";
-import { findErrors } from "../utils/validator";
-import { createErrorMessage } from "../utils/errors";
+import Event, { IEvent } from '../models/event.model';
+import { findErrors } from '../utils/validator';
+import { createErrorMessage } from '../utils/errors';
 
 export const createEvent = async (req: Request, res: Response) => {
   try {
@@ -22,7 +22,7 @@ export const createEvent = async (req: Request, res: Response) => {
     if (parsedStartDate > parsedEndDate) {
       return res
         .status(400)
-        .send({ message: "End date must be after the start date" });
+        .send({ message: 'End date must be after the start date' });
     }
 
     const newEvent = await Event.create({
@@ -34,9 +34,9 @@ export const createEvent = async (req: Request, res: Response) => {
 
     return res
       .status(201)
-      .send({ message: "Event successfully created", data: newEvent });
+      .send({ message: 'Event successfully created', data: newEvent });
   } catch (error) {
     console.error({ error });
-    return res.status(500).send({ message: "Failed to create event" });
+    return res.status(500).send({ message: 'Failed to create event' });
   }
 };

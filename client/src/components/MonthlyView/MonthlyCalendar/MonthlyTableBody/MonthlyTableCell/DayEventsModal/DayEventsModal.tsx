@@ -1,5 +1,5 @@
-import Button from '@/src/components/Button/Button';
-import ModalWrapper from '@/src/components/ModalWrapper/ModalWrapper';
+import Button from '@/src/components/common/Button/Button';
+import ModalWrapper from '@/src/components/common/ModalWrapper/ModalWrapper';
 import { useEventModal } from '@/src/hooks/useEventModal/useEventModal';
 import { EventType } from '@/src/types';
 
