@@ -64,7 +64,6 @@ export const EventModalProvider = ({ children }: { children: ReactNode }) => {
       updateEventMutation.isSuccess ||
       deleteEventMutation.isSuccess
     ) {
-      setServerErrors((prev) => ({ ...prev, sendData: false }));
       closeModal();
     }
   }, [
@@ -78,7 +77,7 @@ export const EventModalProvider = ({ children }: { children: ReactNode }) => {
       title: !isValidText(eventData.title),
       description: !isValidText(eventData.description),
       startDate: !isValidDate(eventData.startDate),
-      endDate: !isValidDate(eventData.endDate),
+      endDate: !isValidDate(eventData.endDate) || eventData.endDate < eventData.startDate,
     };
 
     setErrors(newErrors);
@@ -129,6 +128,7 @@ export const EventModalProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const closeModal = () => {
+    setServerErrors((prev) => ({ ...prev, sendData: false }));
     setIsOpen(false);
   };
 

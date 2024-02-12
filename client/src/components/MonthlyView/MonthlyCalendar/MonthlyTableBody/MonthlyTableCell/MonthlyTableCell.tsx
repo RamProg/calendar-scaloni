@@ -34,7 +34,7 @@ const MonthlyTableCell: React.FC<MonthlyTableCellProps> = ({
           return (
             <li
               key={`${event._id}-${day}`}
-              className="mx-[2px] overflow-hidden text-sm list-none sm:mx-2 text-overflow-ellipsis whitespace-nowrap sm:text-base mb-1 sm:mb-1 cursor-pointer hover:text-blue-500"
+              className="mx-[2px] overflow-hidden text-sm list-none sm:mx-2 text-overflow-ellipsis whitespace-nowrap sm:text-base mb-1 sm:mb-1 cursor-pointer hover:text-blue-800"
               onClick={() => openModal(event)}
             >
               {event.title}
