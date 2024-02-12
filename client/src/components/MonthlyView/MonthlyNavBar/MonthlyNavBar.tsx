@@ -50,7 +50,7 @@ const MonthlyNavBar: React.FC<MonthlyNavBar> = ({
               <h1 className="m-2 text-4xl text-center w-72">
                 {monthString} {year}
               </h1>
-            ): <div className="w-10"/>}
+            ): <div className="w-5"/>}
           </div>
           <div className="flex items-center">
             <Button
