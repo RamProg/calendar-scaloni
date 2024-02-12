@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import MonthlyNavBar from './MonthlyNavBar/MonthlyNavBar';
+import MonthlyNavBar from './MonthlyNavBar/MonthlyNavBarContainer';
 import MonthlyCalendar from './MonthlyCalendar/MonthlyCalendar';
 import { MonthType } from '@/src/types';
 

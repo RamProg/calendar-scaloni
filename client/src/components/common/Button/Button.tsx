@@ -14,23 +14,17 @@ const Button: React.FC<ButtonProps> = ({
   big,
   ...props
 }) => {
-  const getStyleColor = (styleType: string | undefined) => {
-    switch (styleType) {
-      case 'tertiary':
-        return 'red';
-      case 'secondary':
-        return 'blue';
-      case 'primary':
-      default:
-        return 'gray';
-    }
+  const styleClasses = {
+    primary: 'bg-gray-200 hover:bg-gray-300 active:bg-gray-400 border-gray-500',
+    secondary: 'bg-blue-200 hover:bg-blue-300 active:bg-blue-400 border-blue-500',
+    tertiary: 'bg-red-200 hover:bg-red-300 active:bg-red-400 border-red-500',
   };
 
-  const styleColor = getStyleColor(styleType);
+  const styleClass = styleClasses[styleType || 'primary'];
 
   return (
     <button
-      className={`p-2 rounded-lg font-sans font-medium transition-colors border ${big && 'text-xl p-3'} ${styles} bg-${styleColor}-200 hover:bg-${styleColor}-300 active:bg-${styleColor}-400 border-${styleColor}-500`}
+      className={`p-2 rounded-lg font-sans font-medium transition-colors border ${big && 'text-xl p-3'} ${styleClass} ${styles}`}
       {...props}
     >
       {label}

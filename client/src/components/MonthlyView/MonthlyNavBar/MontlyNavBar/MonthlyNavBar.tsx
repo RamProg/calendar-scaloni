@@ -1,26 +1,22 @@
 import Button from '@/src/components/common/Button/Button';
-import { DateDirection } from '../MonthlyView';
-import { useEventModal } from '@/src/hooks/useEventModal/useEventModal';
-import { getMonthName } from '@/src/utils/dates';
 import { isMobile } from 'react-device-detect';
+import { DateDirection } from '@/src/components/MonthlyView/MonthlyView';
 
-type MonthlyNavBar = {
-  month: number;
+type MonthlyNavBarProps = {
+  openModal: () => void;
+  serverErrors: { getData: boolean };
+  monthString: string;
   year: number;
   onChangeDate: (newDateDirection: DateDirection) => void;
 };
 
-const MonthlyNavBar: React.FC<MonthlyNavBar> = ({
-  month,
+const MonthlyNavBar: React.FC<MonthlyNavBarProps> = ({
+  openModal,
+  serverErrors,
+  monthString,
   year,
   onChangeDate,
 }) => {
-  const { openModal } = useEventModal();
-
-  const { serverErrors } = useEventModal();
-
-  const monthString = getMonthName(month);
-
   return (
     <nav>
       {isMobile && (
