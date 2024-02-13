@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm run dev\"",
     "setup": "npm i && cd server && npm i && cd ../client && npm i",
-    "checks": "cd server && npm run checks && cd ../client && npm run checks"
+    "checks": "cd server && npm run checks && cd ../client && npm run checks",
+    "test": "cd server && npm run test && cd ../client && npm run test",
+    "test:coverage": "cd server && npm run test -- --coverage && cd ../client && npm run test -- --coverage"
   },
   "keywords": [],
   "author": "",
