@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input renders correctly 1`] = `
+<input
+  class="block w-full p-2 mt-1 font-normal h-14 sm:h-10"
+  name="test"
+  type="text"
+  value=""
+/>
+`;

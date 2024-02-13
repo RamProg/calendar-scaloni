@@ -5,77 +5,12 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { formatEvents } from '@/src/utils/dates';
 import { SERVER_URL } from '@/src/constants';
 import { useEventModal } from '../useEventModal/useEventModal';
+import axios from 'axios';
 
 type useEventsProps = {
   month: MonthType;
   year: number;
 };
-
-// const tasksLocal: EventType[] = [
-//   {
-//     id: '1',
-//     title: 'Interview with Factorial',
-//     description: 'Interview for the software engineer position',
-//     startDate: '2024-02-01',
-//     endDate: '2024-02-04',
-//   },
-//   {
-//     id: '2',
-//     title: 'Holidays',
-//     description: 'Winter holidays',
-//     startDate: '2024-02-03',
-//     endDate: '2024-02-04',
-//   },
-//   {
-//     id: '3',
-//     title: 'Traveling to Barcelona',
-//     description: 'Summer vacation in Barcelona',
-//     startDate: '2024-02-05',
-//     endDate: '2024-02-06',
-//   },
-//   {
-//     id: '4',
-//     title: 'Interview with Factorial',
-//     description: 'Second interview for the software engineer position',
-//     startDate: '2024-02-07',
-//     endDate: '2024-02-08',
-//   },
-//   {
-//     id: '5',
-//     title: 'Holidays',
-//     description: 'Spring holidays',
-//     startDate: '2024-02-09',
-//     endDate: '2024-02-10',
-//   },
-//   {
-//     id: '6',
-//     title: 'Traveling to Barcelona',
-//     description: 'Second summer vacation in Barcelona',
-//     startDate: '2024-02-11',
-//     endDate: '2024-02-12',
-//   },
-//   {
-//     id: '7',
-//     title: 'Visiting Grandma',
-//     description: 'its her birthday!',
-//     startDate: '2024-02-09',
-//     endDate: '2024-02-13',
-//   },
-//   {
-//     id: '8',
-//     title: 'Studying for exams',
-//     description: 'gonna be tough one',
-//     startDate: '2024-02-08',
-//     endDate: '2024-02-14',
-//   },
-//   {
-//     id: '9',
-//     title: 'Organising the apartment',
-//     description: 'Cleaning and putting stuff in place',
-//     startDate: '2024-02-10',
-//     endDate: '2024-02-16',
-//   },
-// ];
 
 const useEvents = ({ month, year }: useEventsProps) => {
   const [monthlyEventsByDay, setMonthlyEventsByDay] = useState<EventsByDayType>(
@@ -84,17 +19,16 @@ const useEvents = ({ month, year }: useEventsProps) => {
   const { setServerErrors } = useEventModal();
 
   const getEvents = async (): Promise<EventType[]> => {
-    const response = await fetch(
+    console.log('fetching events');
+    const response = await axios.get(
       `${SERVER_URL}/events?month=${month}&year=${year}`
     );
+    console.log('events fetched');
 
-    if (!response.ok) {
-      throw new Error(
-        `Failed to get monthly events: ${response.status} ${response.statusText}`
-      );
-    }
+    console.log('response ok');
 
-    const data = await response.json();
+    const data = await response.data;
+    console.log('there is data', data);
     return data;
   };
 
@@ -113,55 +47,23 @@ const useEvents = ({ month, year }: useEventsProps) => {
   }, [fetchEvents.error, setServerErrors]);
 
   const addEvent = async (event: EventType): Promise<EventType> => {
-    const response = await fetch(SERVER_URL + '/event', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(event),
-    });
-
-    if (!response.ok) {
-      throw new Error(
-        `Failed to add event: ${response.status} ${response.statusText}`
-      );
-    }
-
-    const data = await response.json();
+    const response = await axios.post(`${SERVER_URL}/event`, event);
+    const data = await response.data;
     return data;
   };
 
   const updateEvent = async (event: EventType): Promise<EventType> => {
-    const response = await fetch(SERVER_URL + '/event/' + event._id, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(event),
-    });
-
-    if (!response.ok) {
-      throw new Error(
-        `Failed to update event: ${response.status} ${response.statusText}`
-      );
-    }
-
-    const data = await response.json();
+    console.log('updating event');
+    const response = await axios.put(`${SERVER_URL}/event/${event._id}`, event);
+    console.log('event updated');
+    const data = await response.data;
+    console.log('data', data);
     return data;
   };
 
   const deleteEvent = async (id: string) => {
-    const response = await fetch(SERVER_URL + '/event/' + id, {
-      method: 'DELETE',
-    });
-
-    if (!response.ok) {
-      throw new Error(
-        `Failed to add event: ${response.status} ${response.statusText}`
-      );
-    }
-
-    const data = await response.json();
+    const response = await axios.delete(`${SERVER_URL}/event/${id}`);
+    const data = await response.data;
     return data;
   };
 
@@ -192,12 +94,17 @@ const useEvents = ({ month, year }: useEventsProps) => {
   });
 
   useEffect(() => {
+    console.log('entre al use effect');
+    console.log('fetchEvents.data', fetchEvents.data);
     if (fetchEvents.data) {
-      setMonthlyEventsByDay(formatEvents(fetchEvents.data, month, year));
+      const formattedEvents = formatEvents(fetchEvents.data, month, year);
+      console.log('formattedEvents', formattedEvents);
+      setMonthlyEventsByDay(formattedEvents);
     }
   }, [fetchEvents.data, month, year]);
 
   return {
+    fetchEvents,
     monthlyEventsByDay,
     addEventMutation,
     updateEventMutation,
