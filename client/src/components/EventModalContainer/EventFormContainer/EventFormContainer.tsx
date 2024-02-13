@@ -1,7 +1,7 @@
 import { useEventModal } from '@/src/hooks/useEventModal/useEventModal';
 import EventForm from './EventForm/EventForm';
 
-const inputs = [
+export const inputs = [
   { type: 'text', name: 'title', label: 'Title' },
   { type: 'text', name: 'description', label: 'Description' },
   { type: 'date', name: 'startDate', label: 'Start Date' },

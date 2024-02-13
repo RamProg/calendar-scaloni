@@ -22,7 +22,7 @@ const MonthlyTableCell: React.FC<MonthlyTableCellProps> = ({
   setIsDayEventsModalOpen,
 }) => {
   return (
-    <>
+    <div data-testid="monthly-table-cell">
       <p className="py-1 text-center">{day}</p>
       <ul className="h-1 list-disc list-inside">
         {dayEvents?.slice(0, 3).map((event) => {
@@ -54,7 +54,7 @@ const MonthlyTableCell: React.FC<MonthlyTableCellProps> = ({
           </>
         )}
       </ul>
-    </>
+    </div>
   );
 };
 

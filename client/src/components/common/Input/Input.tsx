@@ -24,7 +24,7 @@ const Input: React.FC<InputProps> = ({
           className="block w-full p-2 mt-1 font-normal h-14 sm:h-10"
         />
         {hasError && (
-          <span className="font-normal text-red-500">
+          <span className="font-normal text-red-500" data-testid="error">
             There is an issue with the {label}
           </span>
         )}

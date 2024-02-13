@@ -119,4 +119,70 @@ describe('EventModalProvider', () => {
 
     expect(contextValue.eventData).toMatchObject(newEventData);
   });
+
+  it('onSave validates and does not send invalid data', () => {
+    let contextValue: any;
+    const invalidEventData: Partial<EventType> = {
+      title: '',
+      description: '',
+      startDate: 'invalid date',
+      endDate: 'invalid date',
+    };
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <EventModalProvider>
+          <EventModalContext.Consumer>
+            {(value) => {
+              contextValue = value;
+              return null;
+            }}
+          </EventModalContext.Consumer>
+        </EventModalProvider>
+      </QueryClientProvider>
+    );
+
+    act(() => {
+      contextValue.updateEventData(invalidEventData);
+      contextValue.onSave();
+    });
+
+    expect(contextValue.errors).toEqual({
+      title: true,
+      description: true,
+      startDate: true,
+      endDate: true,
+    });
+  });
+
+  it('openModal sets editOrAdd and eventData correctly', () => {
+    let contextValue: any;
+    const eventData: EventType = {
+      _id: '1',
+      title: 'Title',
+      description: 'Description',
+      startDate: '2022-01-01',
+      endDate: '2022-01-02',
+    };
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <EventModalProvider>
+          <EventModalContext.Consumer>
+            {(value) => {
+              contextValue = value;
+              return null;
+            }}
+          </EventModalContext.Consumer>
+        </EventModalProvider>
+      </QueryClientProvider>
+    );
+
+    act(() => {
+      contextValue.openModal(eventData);
+    });
+
+    expect(contextValue.editOrAdd).toEqual('edit');
+    expect(contextValue.eventData).toEqual(eventData);
+  });
 });

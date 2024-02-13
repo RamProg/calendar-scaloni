@@ -20,12 +20,7 @@ const EventModalContainer: React.FC = () => {
 
   if (!isOpen) return null;
 
-  return (
-    <EventModal
-      closeModal={closeModal}
-      footer={footer}
-    />
-  );
+  return <EventModal closeModal={closeModal} footer={footer} />;
 };
 
 export default EventModalContainer;

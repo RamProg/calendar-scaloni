@@ -2,30 +2,13 @@ import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import useEvents from './useEvents';
 import { act, renderHook, waitFor } from '@testing-library/react';
-import { EventType } from '@/src/types';
 import { SERVER_URL } from '@/src/constants';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
+import { mockedEvents } from '@/src/mocks';
 
 const month = 2;
 const year = 2024;
-
-const mockedEvents: EventType[] = [
-  {
-    _id: '1',
-    title: 'Interview with Factorial',
-    description: 'Interview for the software engineer position',
-    startDate: '2024-02-01T00:00:00.000Z',
-    endDate: '2024-02-02T00:00:00.000Z',
-  },
-  {
-    _id: '2',
-    title: 'Holidays',
-    description: 'Winter holidays',
-    startDate: '2024-02-02T00:00:00.000Z',
-    endDate: '2024-02-03T00:00:00.000Z',
-  },
-];
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { retry: false } },
