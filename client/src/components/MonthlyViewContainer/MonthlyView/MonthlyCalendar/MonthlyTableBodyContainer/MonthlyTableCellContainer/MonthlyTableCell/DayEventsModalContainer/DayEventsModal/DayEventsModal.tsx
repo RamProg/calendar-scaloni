@@ -26,7 +26,7 @@ const DayEventsModal: React.FC<DayEventsModalProps> = ({
           {events.map((event: EventType, index: number) => (
             <li
               key={event.title + index}
-              className="py-1 text-xl hover:cursor-pointer"
+              className="py-1 text-xl hover:cursor-pointer hover:text-blue-800"
               onClick={() => openEventModal(event)}
             >
               {event.title}
