@@ -1,9 +1,9 @@
 import useEvents from '@/src/hooks/useEvents/useEvents';
 import { MonthType } from '@/src/types';
-import { getDaysInMonth, getFirstDayOfTheMonth } from '@/src/utils/dates';
+import { getDaysInMonth, getFirstDayOfTheMonth } from '@/src/utils/dates/dates';
 import MonthlyTableBody from './MonthlyTableBody/MonthlyTableBody';
 
-type MonthlyTableBodyProps = {
+type MonthlyTableBodyContainerProps = {
   month: MonthType;
   year: number;
 };
@@ -11,7 +11,7 @@ type MonthlyTableBodyProps = {
 const rows = new Array(5).fill(null);
 const columns = new Array(7).fill(null);
 
-const MonthlyTableBodyContainer: React.FC<MonthlyTableBodyProps> = ({
+const MonthlyTableBodyContainer: React.FC<MonthlyTableBodyContainerProps> = ({
   month,
   year,
 }) => {

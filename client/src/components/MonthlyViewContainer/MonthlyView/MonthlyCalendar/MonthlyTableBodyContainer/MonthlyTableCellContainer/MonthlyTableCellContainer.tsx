@@ -1,7 +1,7 @@
 import { useEventModal } from '@/src/hooks/useEventModal/useEventModal';
 import { EventType } from '@/src/types';
 import { useState } from 'react';
-import { getMonthName } from '@/src/utils/dates';
+import { getMonthName } from '@/src/utils/dates/dates';
 import MonthlyTableCell from './MonthlyTableCell/MonthlyTableCell';
 
 type MonthlyTableCellContainerProps = {

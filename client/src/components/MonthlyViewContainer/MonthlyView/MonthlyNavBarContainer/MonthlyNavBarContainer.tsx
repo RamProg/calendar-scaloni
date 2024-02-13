@@ -1,6 +1,6 @@
 import { useEventModal } from '@/src/hooks/useEventModal/useEventModal';
-import { getMonthName } from '@/src/utils/dates';
-import MonthlyNavBar from './MontlyNavBar/MonthlyNavBar';
+import { getMonthName } from '@/src/utils/dates/dates';
+import MonthlyNavBar from './MonthlyNavBar/MonthlyNavBar';
 import { DateDirection } from '@/src/types';
 
 type MonthlyNavBarContainerProps = {

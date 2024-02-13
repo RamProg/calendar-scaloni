@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from 'react';
-import { EventModalContext } from './EventModalContext';
+import { EventModalContext } from '../EventModalContext/EventModalContext';
 import {
   EventErrorsType,
   EventType,
@@ -7,8 +7,8 @@ import {
   ServerErrorsType,
 } from '@/src/types';
 import useEvents from '@/src/hooks/useEvents/useEvents';
-import { isValidText, isValidDate } from '@/src/utils/validator';
-import { currentMonth, currentYear } from '@/src/utils/dates';
+import { isValidText, isValidDate } from '@/src/utils/validator/validator';
+import { currentMonth, currentYear } from '@/src/utils/dates/dates';
 
 const emptyEventData: EventType = {
   _id: '',

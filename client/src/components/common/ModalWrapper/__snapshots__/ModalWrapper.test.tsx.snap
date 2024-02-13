@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ModalWrapper props renders correctly 1`] = `
+<p>
+  Modal content
+</p>
+`;

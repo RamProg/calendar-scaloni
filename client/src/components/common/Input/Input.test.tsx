@@ -6,7 +6,7 @@ describe('Input', () => {
   const mockOnChange = jest.fn();
   const inputLabel = 'Test Input';
 
-  test('renders correctly', () => {
+  it('renders correctly', () => {
     render(
       <Input
         label={inputLabel}
@@ -22,7 +22,7 @@ describe('Input', () => {
     expect(inputElement).toMatchSnapshot();
   });
 
-  test('calls onChange prop when text is entered', () => {
+  it('calls onChange prop when text is entered', () => {
     render(
       <Input
         label={inputLabel}
@@ -40,7 +40,7 @@ describe('Input', () => {
     expect(mockOnChange).toHaveBeenCalledTimes(1);
   });
 
-  test('shows error state when hasError prop is true', () => {
+  it('shows error state when hasError prop is true', () => {
     render(
       <Input
         label={inputLabel}

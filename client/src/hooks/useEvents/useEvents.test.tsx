@@ -16,63 +16,14 @@ const mockedEvents: EventType[] = [
     title: 'Interview with Factorial',
     description: 'Interview for the software engineer position',
     startDate: '2024-02-01T00:00:00.000Z',
-    endDate: '2024-02-04T00:00:00.000Z',
+    endDate: '2024-02-02T00:00:00.000Z',
   },
   {
     _id: '2',
     title: 'Holidays',
     description: 'Winter holidays',
-    startDate: '2024-02-03T00:00:00.000Z',
-    endDate: '2024-02-04T00:00:00.000Z',
-  },
-  {
-    _id: '3',
-    title: 'Traveling to Barcelona',
-    description: 'Summer vacation in Barcelona',
-    startDate: '2024-02-05T00:00:00.000Z',
-    endDate: '2024-02-06T00:00:00.000Z',
-  },
-  {
-    _id: '4',
-    title: 'Interview with Factorial',
-    description: 'Second interview for the software engineer position',
-    startDate: '2024-02-07T00:00:00.000Z',
-    endDate: '2024-02-08T00:00:00.000Z',
-  },
-  {
-    _id: '5',
-    title: 'Holidays',
-    description: 'Spring holidays',
-    startDate: '2024-02-09T00:00:00.000Z',
-    endDate: '2024-02-10T00:00:00.000Z',
-  },
-  {
-    _id: '6',
-    title: 'Traveling to Barcelona',
-    description: 'Second summer vacation in Barcelona',
-    startDate: '2024-02-11T00:00:00.000Z',
-    endDate: '2024-02-12T00:00:00.000Z',
-  },
-  {
-    _id: '7',
-    title: 'Visiting Grandma',
-    description: 'its her birthday!',
-    startDate: '2024-02-09T00:00:00.000Z',
-    endDate: '2024-02-13T00:00:00.000Z',
-  },
-  {
-    _id: '8',
-    title: 'Studying for exams',
-    description: 'gonna be tough one',
-    startDate: '2024-02-08T00:00:00.000Z',
-    endDate: '2024-02-14T00:00:00.000Z',
-  },
-  {
-    _id: '9',
-    title: 'Organising the apartment',
-    description: 'Cleaning and putting stuff in place',
-    startDate: '2024-02-10T00:00:00.000Z',
-    endDate: '2024-02-16T00:00:00.000Z',
+    startDate: '2024-02-02T00:00:00.000Z',
+    endDate: '2024-02-03T00:00:00.000Z',
   },
 ];
 
@@ -87,20 +38,47 @@ const wrapper = ({ children }: { children: React.ReactNode }) => (
 );
 
 describe('useEvents', () => {
-  it.only('should fetch events', async () => {
-    // const formattedData = {
-    //   1: [mockedEvents[0]],
-    //   3: [mockedEvents[1]],
-    //   5: [mockedEvents[2]],
-    //   7: [mockedEvents[3]],
-    //   9: [mockedEvents[4], mockedEvents[6]],
-    //   10: [mockedEvents[7], mockedEvents[8]],
-    //   11: [mockedEvents[5]],
-    // };
+  it('should fetch events', async () => {
+    const formattedData = {
+      1: [
+        {
+          _id: '1',
+          title: 'Interview with Factorial',
+          description: 'Interview for the software engineer position',
+          startDate: '2024-02-01',
+          endDate: '2024-02-02',
+        },
+      ],
+      2: [
+        {
+          _id: '1',
+          title: 'Interview with Factorial',
+          description: 'Interview for the software engineer position',
+          startDate: '2024-02-01',
+          endDate: '2024-02-02',
+        },
+        {
+          _id: '2',
+          title: 'Holidays',
+          description: 'Winter holidays',
+          startDate: '2024-02-02',
+          endDate: '2024-02-03',
+        },
+      ],
+      3: [
+        {
+          _id: '2',
+          title: 'Holidays',
+          description: 'Winter holidays',
+          startDate: '2024-02-02',
+          endDate: '2024-02-03',
+        },
+      ],
+    };
 
     mock
       .onGet(`${SERVER_URL}/events?month=${month}&year=${year}`)
-      .reply(200, { data: mockedEvents });
+      .reply(200, mockedEvents);
 
     const { result } = renderHook(() => useEvents({ month, year }), {
       wrapper,
@@ -108,9 +86,9 @@ describe('useEvents', () => {
 
     await waitFor(() => result.current.fetchEvents.isSuccess);
 
-    expect(result.current.fetchEvents.data).toEqual(mockedEvents);
-
-    console.log(result.current.monthlyEventsByDay);
+    await waitFor(() =>
+      expect(result.current.monthlyEventsByDay).toEqual(formattedData)
+    );
   });
 
   it('should add an event', async () => {
@@ -128,7 +106,7 @@ describe('useEvents', () => {
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     );
 
-    const { result } = renderHook(() => useEvents({ month: 1, year: 2022 }), {
+    const { result } = renderHook(() => useEvents({ month, year }), {
       wrapper,
     });
 
@@ -158,7 +136,7 @@ describe('useEvents', () => {
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     );
 
-    const { result } = renderHook(() => useEvents({ month: 1, year: 2022 }), {
+    const { result } = renderHook(() => useEvents({ month, year }), {
       wrapper,
     });
 
@@ -183,7 +161,7 @@ describe('useEvents', () => {
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     );
 
-    const { result } = renderHook(() => useEvents({ month: 1, year: 2022 }), {
+    const { result } = renderHook(() => useEvents({ month, year }), {
       wrapper,
     });
 
@@ -193,6 +171,6 @@ describe('useEvents', () => {
 
     await waitFor(() => result.current.updateEventMutation.isSuccess);
 
-    expect(result.current.updateEventMutation.data).toEqual({ data });
+    expect(result.current.updateEventMutation.data).toEqual(data);
   });
 });

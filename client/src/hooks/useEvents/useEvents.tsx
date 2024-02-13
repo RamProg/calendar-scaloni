@@ -2,7 +2,7 @@ import { EventsByDayType, MonthType } from '@/src/types';
 import { useEffect, useState } from 'react';
 import { EventType } from '@/src/types';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { formatEvents } from '@/src/utils/dates';
+import { formatEvents } from '@/src/utils/dates/dates';
 import { SERVER_URL } from '@/src/constants';
 import { useEventModal } from '../useEventModal/useEventModal';
 import axios from 'axios';
@@ -19,17 +19,10 @@ const useEvents = ({ month, year }: useEventsProps) => {
   const { setServerErrors } = useEventModal();
 
   const getEvents = async (): Promise<EventType[]> => {
-    console.log('fetching events');
     const response = await axios.get(
       `${SERVER_URL}/events?month=${month}&year=${year}`
     );
-    console.log('events fetched');
-
-    console.log('response ok');
-
-    const data = await response.data;
-    console.log('there is data', data);
-    return data;
+    return await response.data;
   };
 
   const fetchEvents = useQuery({
@@ -48,23 +41,17 @@ const useEvents = ({ month, year }: useEventsProps) => {
 
   const addEvent = async (event: EventType): Promise<EventType> => {
     const response = await axios.post(`${SERVER_URL}/event`, event);
-    const data = await response.data;
-    return data;
+    return await response.data;
   };
 
   const updateEvent = async (event: EventType): Promise<EventType> => {
-    console.log('updating event');
     const response = await axios.put(`${SERVER_URL}/event/${event._id}`, event);
-    console.log('event updated');
-    const data = await response.data;
-    console.log('data', data);
-    return data;
+    return await response.data;
   };
 
   const deleteEvent = async (id: string) => {
     const response = await axios.delete(`${SERVER_URL}/event/${id}`);
-    const data = await response.data;
-    return data;
+    return await response.data;
   };
 
   const onSuccess = () => {
@@ -94,11 +81,8 @@ const useEvents = ({ month, year }: useEventsProps) => {
   });
 
   useEffect(() => {
-    console.log('entre al use effect');
-    console.log('fetchEvents.data', fetchEvents.data);
     if (fetchEvents.data) {
       const formattedEvents = formatEvents(fetchEvents.data, month, year);
-      console.log('formattedEvents', formattedEvents);
       setMonthlyEventsByDay(formattedEvents);
     }
   }, [fetchEvents.data, month, year]);

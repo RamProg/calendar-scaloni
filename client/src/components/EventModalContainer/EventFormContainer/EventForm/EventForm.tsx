@@ -15,7 +15,7 @@ const EventForm: React.FC<EventFormProps> = ({
   inputs,
 }) => {
   return (
-    <form id="event-form">
+    <form id="event-form" data-testid="event-form-container">
       {inputs.map((input) => (
         <Input
           key={input.name}

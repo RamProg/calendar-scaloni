@@ -1,4 +1,4 @@
-import { EventType, EventsByDayType, MonthType } from '../types';
+import { EventType, EventsByDayType, MonthType } from '../../types';
 
 export const getDaysInMonth = (month: number, year: number) =>
   new Date(year, month, 0).getDate();

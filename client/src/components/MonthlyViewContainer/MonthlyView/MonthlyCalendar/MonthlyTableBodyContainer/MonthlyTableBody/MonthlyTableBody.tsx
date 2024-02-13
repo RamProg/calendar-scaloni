@@ -1,7 +1,7 @@
 import { EventsByDayType, MonthType } from '@/src/types';
 import MonthlyTableCellContainer from '../MonthlyTableCellContainer/MonthlyTableCellContainer';
 
-type MonthlyTableBodyProps = {
+export type MonthlyTableBodyProps = {
   month: MonthType;
   year: number;
   startingDay: number;

@@ -19,19 +19,19 @@ describe('ModalWrapper', () => {
         </ModalWrapper>
       );
     });
-    test('renders correctly', () => {
+    it('renders correctly', () => {
       const modalElement = screen.getByText('Modal content');
       expect(modalElement).toBeInTheDocument();
       expect(modalElement).toMatchSnapshot();
     });
 
-    test('calls onClose prop when modal overlay is clicked', () => {
+    it('calls onClose prop when modal overlay is clicked', () => {
       const modalOverlay = screen.getByTestId(/modal-overlay/i);
       fireEvent.click(modalOverlay);
       expect(mockOnClose).toHaveBeenCalledTimes(1);
     });
 
-    test('renders footer correctly', () => {
+    it('renders footer correctly', () => {
       const footerElement = screen.getByText('Footer content');
       expect(footerElement).toBeInTheDocument();
     });
@@ -42,7 +42,7 @@ describe('ModalWrapper', () => {
       jest.clearAllMocks();
     });
 
-    test('renders error message when serverErrors.sendData is true', () => {
+    it('renders error message when serverErrors.sendData is true', () => {
       // Mock the serverErrors.sendData condition
       (useEventModal as jest.Mock).mockReturnValue({
         serverErrors: { sendData: true },
@@ -58,7 +58,7 @@ describe('ModalWrapper', () => {
       expect(errorMessage).toBeInTheDocument();
     });
 
-    test('does not render error message when serverErrors.sendData is false', () => {
+    it('does not render error message when serverErrors.sendData is false', () => {
       // Mock the serverErrors.sendData condition
       (useEventModal as jest.Mock).mockReturnValue({
         serverErrors: { sendData: false },
