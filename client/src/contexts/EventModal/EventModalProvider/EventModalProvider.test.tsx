@@ -50,6 +50,7 @@ describe('EventModalProvider', () => {
   });
 
   it('openModal sets isOpen to true', () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let contextValue: any;
     render(
       <QueryClientProvider client={queryClient}>
@@ -72,6 +73,7 @@ describe('EventModalProvider', () => {
   });
 
   it('closeModal sets isOpen to false', () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let contextValue: any;
     render(
       <QueryClientProvider client={queryClient}>
@@ -94,6 +96,7 @@ describe('EventModalProvider', () => {
   });
 
   it('updateEventData updates eventData', () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let contextValue: any;
     const newEventData: Partial<EventType> = {
       title: 'New Title',
@@ -121,6 +124,7 @@ describe('EventModalProvider', () => {
   });
 
   it('onSave validates and does not send invalid data', () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let contextValue: any;
     const invalidEventData: Partial<EventType> = {
       title: '',
@@ -156,6 +160,7 @@ describe('EventModalProvider', () => {
   });
 
   it('openModal sets editOrAdd and eventData correctly', () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let contextValue: any;
     const eventData: EventType = {
       _id: '1',

@@ -1,13 +1,14 @@
 import '@testing-library/jest-dom';
 import { render, fireEvent } from '@testing-library/react';
-import EventForm from './EventForm';
-import { inputs } from '../EventFormContainer';
+import EventForm, { EventFormProps } from './EventForm';
+import { inputs } from '@/src/constants';
 
 describe('EventForm', () => {
   const mockOnChange = jest.fn();
 
-  const props: any = {
+  const props: EventFormProps = {
     eventData: {
+      _id: '1',
       title: 'Test Event',
       description: 'Test Description',
       startDate: '2024-02-02T00:00:00.000Z',
@@ -46,6 +47,8 @@ describe('EventForm', () => {
     };
 
     const { getByTestId } = render(<EventForm {...errorProps} />);
-    expect(getByTestId('error')).toHaveTextContent(/There is an issue with the Title/);
+    expect(getByTestId('error')).toHaveTextContent(
+      /There is an issue with the Title/
+    );
   });
 });

@@ -21,7 +21,7 @@
     "paths": {
       "@/*": ["./*"]
     },
-    "esModuleInterop": true,
+    "esModuleInterop": true
   },
   "include": ["src"],
   "references": [

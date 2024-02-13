@@ -1,7 +1,7 @@
 import Input from '@/src/components/common/Input/Input';
 import { EventErrorsType, EventType } from '@/src/types';
 
-type EventFormProps = {
+export type EventFormProps = {
   eventData: EventType;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   errors: EventErrorsType;

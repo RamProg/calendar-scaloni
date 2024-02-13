@@ -13,8 +13,7 @@ describe('DayEventsModalContainer', () => {
   beforeEach(() => {
     (useEventModal as jest.Mock).mockReturnValue({
       openModal: mockOpenModal,
-    serverErrors: { sendData: false },
-
+      serverErrors: { sendData: false },
     });
   });
 

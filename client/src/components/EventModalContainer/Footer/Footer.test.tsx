@@ -6,7 +6,13 @@ describe('Footer', () => {
   it('calls onSave with correct id when Save/Create button is clicked', () => {
     const onSave = jest.fn();
     const { getByText } = render(
-      <Footer onSave={onSave} onDelete={() => {}} closeModal={() => {}} _id="1" editOrAdd="add" />
+      <Footer
+        onSave={onSave}
+        onDelete={() => {}}
+        closeModal={() => {}}
+        _id="1"
+        editOrAdd="add"
+      />
     );
 
     fireEvent.click(getByText('Create'));
@@ -16,7 +22,13 @@ describe('Footer', () => {
   it('calls onDelete with correct id when Delete button is clicked', () => {
     const onDelete = jest.fn();
     const { getByText } = render(
-      <Footer onSave={() => {}} onDelete={onDelete} closeModal={() => {}} _id="1" editOrAdd="edit" />
+      <Footer
+        onSave={() => {}}
+        onDelete={onDelete}
+        closeModal={() => {}}
+        _id="1"
+        editOrAdd="edit"
+      />
     );
 
     fireEvent.click(getByText('Delete'));
@@ -26,7 +38,13 @@ describe('Footer', () => {
   it('calls closeModal when Close button is clicked', () => {
     const closeModal = jest.fn();
     const { getByText } = render(
-      <Footer onSave={() => {}} onDelete={() => {}} closeModal={closeModal} _id="1" editOrAdd="add" />
+      <Footer
+        onSave={() => {}}
+        onDelete={() => {}}
+        closeModal={closeModal}
+        _id="1"
+        editOrAdd="add"
+      />
     );
 
     fireEvent.click(getByText('Close'));
@@ -35,7 +53,13 @@ describe('Footer', () => {
 
   it('renders Create button when editOrAdd is add', () => {
     const { getByText } = render(
-      <Footer onSave={() => {}} onDelete={() => {}} closeModal={() => {}} _id="1" editOrAdd="add" />
+      <Footer
+        onSave={() => {}}
+        onDelete={() => {}}
+        closeModal={() => {}}
+        _id="1"
+        editOrAdd="add"
+      />
     );
 
     expect(getByText('Create')).toBeInTheDocument();
@@ -43,7 +67,13 @@ describe('Footer', () => {
 
   it('renders Save and Delete buttons when editOrAdd is edit', () => {
     const { getByText } = render(
-      <Footer onSave={() => {}} onDelete={() => {}} closeModal={() => {}} _id="1" editOrAdd="edit" />
+      <Footer
+        onSave={() => {}}
+        onDelete={() => {}}
+        closeModal={() => {}}
+        _id="1"
+        editOrAdd="edit"
+      />
     );
 
     expect(getByText('Save')).toBeInTheDocument();

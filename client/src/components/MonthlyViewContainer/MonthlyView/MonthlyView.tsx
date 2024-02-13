@@ -5,7 +5,7 @@ import MonthlyNavBarContainer from './MonthlyNavBarContainer/MonthlyNavBarContai
 type MonthlyViewProps = {
   month: MonthType;
   year: number;
-  onChangeDate: (dateDirection: DateDirection) => void
+  onChangeDate: (dateDirection: DateDirection) => void;
 };
 
 const MonthlyView: React.FC<MonthlyViewProps> = ({
@@ -15,7 +15,11 @@ const MonthlyView: React.FC<MonthlyViewProps> = ({
 }) => {
   return (
     <div className="flex flex-col w-screen h-screen p-4">
-      <MonthlyNavBarContainer month={month} year={year} onChangeDate={onChangeDate} />
+      <MonthlyNavBarContainer
+        month={month}
+        year={year}
+        onChangeDate={onChangeDate}
+      />
       <MonthlyCalendar month={month} year={year} />
     </div>
   );

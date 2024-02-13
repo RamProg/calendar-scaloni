@@ -14,7 +14,10 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
   const { serverErrors } = useEventModal();
 
   return (
-    <div className="fixed inset-0 z-10 flex items-center justify-center overflow-y-auto" data-testid="wrapper">
+    <div
+      className="fixed inset-0 z-10 flex items-center justify-center overflow-y-auto"
+      data-testid="wrapper"
+    >
       <div className="fixed inset-0 transition-opacity" aria-hidden="true">
         <div
           data-testid="modal-overlay"
