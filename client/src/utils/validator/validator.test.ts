@@ -3,6 +3,7 @@ import { isValidText, isValidDate } from './validator';
 describe('validator', () => {
   test('isValidText', () => {
     expect(isValidText('')).toBe(false);
+    expect(isValidText('            ')).toBe(false);
     expect(isValidText('Hello')).toBe(true);
   });
 

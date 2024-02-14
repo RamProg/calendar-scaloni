@@ -1,6 +1,5 @@
 export const isValidText = (text: string) => {
-  const result = text.length > 0;
-  return result;
+  return text.trim().length > 0;
 };
 
 export const isValidDate = (date: string) => {
