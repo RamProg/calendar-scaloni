@@ -1,5 +1,5 @@
 import { useEventModal } from '@/src/hooks/useEventModal/useEventModal';
-import { EventType } from '@/src/types';
+import { EventType, MonthType } from '@/src/types';
 import { useState } from 'react';
 import { getMonthName } from '@/src/utils/dates/dates';
 import MonthlyTableCell from './MonthlyTableCell/MonthlyTableCell';
@@ -7,7 +7,7 @@ import MonthlyTableCell from './MonthlyTableCell/MonthlyTableCell';
 type MonthlyTableCellContainerProps = {
   dayEvents: EventType[];
   day: number;
-  month: number;
+  month: MonthType;
   year: number;
   hasMoreThanThreeEvents: boolean;
 };
@@ -25,12 +25,16 @@ const MonthlyTableCellContainer: React.FC<MonthlyTableCellContainerProps> = ({
 
   const date = `${day} ${getMonthName(month)} ${year}`;
 
+  const toogleModal = () => {
+    setIsDayEventsModalOpen((prev) => !prev);
+  };
+
   return (
     <MonthlyTableCell
       date={date}
       openModal={openModal}
       isDayEventsModalOpen={isDayEventsModalOpen}
-      setIsDayEventsModalOpen={setIsDayEventsModalOpen}
+      toogleModal={toogleModal}
       hasMoreThanThreeEvents={hasMoreThanThreeEvents}
       dayEvents={dayEvents}
       day={day}

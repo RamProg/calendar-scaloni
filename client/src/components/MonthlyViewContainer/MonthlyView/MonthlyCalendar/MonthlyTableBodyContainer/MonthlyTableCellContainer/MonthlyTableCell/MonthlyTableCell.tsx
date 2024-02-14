@@ -9,7 +9,7 @@ type MonthlyTableCellProps = {
   date: string;
   openModal: (event: EventType) => void;
   isDayEventsModalOpen: boolean;
-  setIsDayEventsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  toogleModal: () => void;
 };
 
 const MonthlyTableCell: React.FC<MonthlyTableCellProps> = ({
@@ -19,7 +19,7 @@ const MonthlyTableCell: React.FC<MonthlyTableCellProps> = ({
   date,
   openModal,
   isDayEventsModalOpen,
-  setIsDayEventsModalOpen,
+  toogleModal,
 }) => {
   return (
     <div data-testid="monthly-table-cell">
@@ -39,15 +39,15 @@ const MonthlyTableCell: React.FC<MonthlyTableCellProps> = ({
         {hasMoreThanThreeEvents && (
           <>
             <li
-              className="mx-2 mb-1 text-center underline list-none sm:mx-2 text-overflow-ellipsis whitespace-nowrap sm:text-base sm:mb-1 hover:cursor-pointer hover:text-blue-800"
-              onClick={() => setIsDayEventsModalOpen(true)}
+              className="mx-2 mb-1 text-sm text-center underline list-none sm:mx-2 text-overflow-ellipsis whitespace-nowrap sm:text-base sm:mb-1 hover:cursor-pointer hover:text-blue-800"
+              onClick={toogleModal}
             >
               {isDesktop && 'Show '}More
             </li>
             {isDayEventsModalOpen && (
               <DayEventsModalContainer
                 date={`${date}`}
-                onClose={() => setIsDayEventsModalOpen(false)}
+                onClose={toogleModal}
                 events={dayEvents}
               />
             )}

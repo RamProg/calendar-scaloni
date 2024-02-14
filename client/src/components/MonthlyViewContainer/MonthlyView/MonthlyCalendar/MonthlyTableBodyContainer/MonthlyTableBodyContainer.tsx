@@ -15,10 +15,7 @@ const MonthlyTableBodyContainer: React.FC<MonthlyTableBodyContainerProps> = ({
   month,
   year,
 }) => {
-  const { monthlyEventsByDay } = useEvents({
-    month,
-    year,
-  });
+  const { monthlyEventsByDay } = useEvents();
 
   const startingDay = getFirstDayOfTheMonth(month, year);
   const lastDay: number = getDaysInMonth(month, year);

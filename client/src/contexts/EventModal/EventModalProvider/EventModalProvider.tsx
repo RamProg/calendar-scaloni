@@ -1,14 +1,8 @@
 import { ReactNode, useEffect, useState } from 'react';
 import { EventModalContext } from '../EventModalContext/EventModalContext';
-import {
-  EventErrorsType,
-  EventType,
-  MonthType,
-  ServerErrorsType,
-} from '@/src/types';
+import { EventErrorsType, EventType, ServerErrorsType } from '@/src/types';
 import useEvents from '@/src/hooks/useEvents/useEvents';
 import { isValidText, isValidDate } from '@/src/utils/validator/validator';
-import { currentMonth, currentYear } from '@/src/utils/dates/dates';
 
 const emptyEventData: EventType = {
   _id: '',
@@ -39,10 +33,7 @@ export const EventModalProvider = ({ children }: { children: ReactNode }) => {
     useState<ServerErrorsType>(noServerErrors);
 
   const { addEventMutation, updateEventMutation, deleteEventMutation } =
-    useEvents({
-      month: currentMonth as MonthType,
-      year: currentYear,
-    });
+    useEvents();
 
   useEffect(() => {
     if (

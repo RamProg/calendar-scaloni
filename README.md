@@ -46,3 +46,10 @@ To see more about test coverage you can run `npm run test:coverage`
 ## Server docs
 
 These can be found at http://localhost:8000/docs when run locally
+
+## Next features
+
+- startTime and endTime in events.
+- Dynamic calendar cells to display a number of events based on available space.
+- Dark mode.
+- Weekly and Daily Views.

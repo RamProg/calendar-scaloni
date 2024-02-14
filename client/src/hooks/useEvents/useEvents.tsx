@@ -1,4 +1,4 @@
-import { EventsByDayType, MonthType } from '@/src/types';
+import { EventsByDayType } from '@/src/types';
 import { useEffect, useState } from 'react';
 import { EventType } from '@/src/types';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -6,17 +6,14 @@ import { formatEvents } from '@/src/utils/dates/dates';
 import { SERVER_URL } from '@/src/constants';
 import { useEventModal } from '../useEventModal/useEventModal';
 import axios from 'axios';
+import { useCurrentViewedDate } from '../useCurrentViewedDate/useCurrentViewedDate';
 
-type useEventsProps = {
-  month: MonthType;
-  year: number;
-};
-
-const useEvents = ({ month, year }: useEventsProps) => {
+const useEvents = () => {
   const [monthlyEventsByDay, setMonthlyEventsByDay] = useState<EventsByDayType>(
     {}
   );
   const { setServerErrors } = useEventModal();
+  const { month, year } = useCurrentViewedDate();
 
   const getEvents = async (): Promise<EventType[]> => {
     const response = await axios.get(
