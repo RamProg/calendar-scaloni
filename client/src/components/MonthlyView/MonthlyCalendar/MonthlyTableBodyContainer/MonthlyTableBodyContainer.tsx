@@ -1,20 +1,13 @@
 import useEvents from '@/src/hooks/useEvents/useEvents';
-import { MonthType } from '@/src/types';
 import { getDaysInMonth, getFirstDayOfTheMonth } from '@/src/utils/dates/dates';
 import MonthlyTableBody from './MonthlyTableBody/MonthlyTableBody';
-
-type MonthlyTableBodyContainerProps = {
-  month: MonthType;
-  year: number;
-};
+import { useCurrentViewedDate } from '@/src/hooks/useCurrentViewedDate/useCurrentViewedDate';
 
 const rows = new Array(5).fill(null);
 const columns = new Array(7).fill(null);
 
-const MonthlyTableBodyContainer: React.FC<MonthlyTableBodyContainerProps> = ({
-  month,
-  year,
-}) => {
+const MonthlyTableBodyContainer: React.FC = () => {
+  const { month, year } = useCurrentViewedDate();
   const { monthlyEventsByDay } = useEvents();
 
   const startingDay = getFirstDayOfTheMonth(month, year);
@@ -35,8 +28,6 @@ const MonthlyTableBodyContainer: React.FC<MonthlyTableBodyContainerProps> = ({
       lastDay={lastDay}
       isToday={isToday}
       nextDay={nextDay}
-      month={month}
-      year={year}
       columns={columns}
       rows={rows}
       monthlyEventsByDay={monthlyEventsByDay}

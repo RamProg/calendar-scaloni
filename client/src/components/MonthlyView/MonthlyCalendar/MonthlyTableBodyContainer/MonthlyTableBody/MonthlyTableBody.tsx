@@ -1,9 +1,7 @@
-import { EventsByDayType, MonthType } from '@/src/types';
+import { EventsByDayType } from '@/src/types';
 import MonthlyTableCellContainer from '../MonthlyTableCellContainer/MonthlyTableCellContainer';
 
 export type MonthlyTableBodyProps = {
-  month: MonthType;
-  year: number;
   startingDay: number;
   lastDay: number;
   isToday: (today: number) => boolean;
@@ -14,8 +12,6 @@ export type MonthlyTableBodyProps = {
 };
 
 const MonthlyTableBody: React.FC<MonthlyTableBodyProps> = ({
-  month,
-  year,
   nextDay,
   startingDay,
   lastDay,
@@ -46,8 +42,6 @@ const MonthlyTableBody: React.FC<MonthlyTableBodyProps> = ({
                   {nextDay > 0 && (
                     <MonthlyTableCellContainer
                       key={nextDay}
-                      month={month}
-                      year={year}
                       dayEvents={monthlyEventsByDay[nextDay]}
                       day={nextDay}
                       hasMoreThanThreeEvents={

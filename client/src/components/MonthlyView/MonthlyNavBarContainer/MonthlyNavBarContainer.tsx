@@ -1,21 +1,11 @@
 import { useEventModal } from '@/src/hooks/useEventModal/useEventModal';
 import { getMonthName } from '@/src/utils/dates/dates';
 import MonthlyNavBar from './MonthlyNavBar/MonthlyNavBar';
-import { DateDirection } from '@/src/types';
+import { useCurrentViewedDate } from '@/src/hooks/useCurrentViewedDate/useCurrentViewedDate';
 
-type MonthlyNavBarContainerProps = {
-  month: number;
-  year: number;
-  onChangeDate: (newDateDirection: DateDirection) => void;
-};
-
-const MonthlyNavBarContainer: React.FC<MonthlyNavBarContainerProps> = ({
-  month,
-  year,
-  onChangeDate,
-}) => {
+const MonthlyNavBarContainer: React.FC = () => {
+  const { month, year, onChangeDate } = useCurrentViewedDate();
   const { openModal } = useEventModal();
-
   const { serverErrors } = useEventModal();
 
   const monthString = getMonthName(month);

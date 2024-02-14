@@ -2,8 +2,8 @@ import './App.css';
 import EventModalContainer from '@/src/components/EventModalContainer/EventModalContainer';
 import { EventModalProvider } from '@/src/contexts/EventModal/EventModalProvider/EventModalProvider';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import MonthlyViewContainer from '@/src/components/MonthlyViewContainer/MonthlyViewContainer';
 import { CurrentViewedDateProvider } from './contexts/CurrentViewedDate/CurrentViewedDateProvider/CurrentViewedDateProvider';
+import MonthlyView from './components/MonthlyView/MonthlyView';
 
 const queryClient = new QueryClient();
 
@@ -12,7 +12,7 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <CurrentViewedDateProvider>
         <EventModalProvider>
-          <MonthlyViewContainer />
+          <MonthlyView />
           <EventModalContainer />
         </EventModalProvider>
       </CurrentViewedDateProvider>

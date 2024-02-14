@@ -4,9 +4,8 @@ import { isDesktop } from 'react-device-detect';
 
 type MonthlyTableCellProps = {
   dayEvents: EventType[];
-  day: number;
+  day: string;
   hasMoreThanThreeEvents: boolean;
-  date: string;
   openModal: (event: EventType) => void;
   isDayEventsModalOpen: boolean;
   toogleModal: () => void;
@@ -16,7 +15,6 @@ const MonthlyTableCell: React.FC<MonthlyTableCellProps> = ({
   dayEvents,
   day,
   hasMoreThanThreeEvents,
-  date,
   openModal,
   isDayEventsModalOpen,
   toogleModal,
@@ -46,7 +44,7 @@ const MonthlyTableCell: React.FC<MonthlyTableCellProps> = ({
             </li>
             {isDayEventsModalOpen && (
               <DayEventsModalContainer
-                date={`${date}`}
+                day={day}
                 onClose={toogleModal}
                 events={dayEvents}
               />

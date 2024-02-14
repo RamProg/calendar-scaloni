@@ -2,19 +2,24 @@ import Button from '@/src/components/common/Button/Button';
 import { useEventModal } from '@/src/hooks/useEventModal/useEventModal';
 import { EventType } from '@/src/types';
 import DayEventsModal from './DayEventsModal/DayEventsModal';
+import { useCurrentViewedDate } from '@/src/hooks/useCurrentViewedDate/useCurrentViewedDate';
+import { getMonthName } from '@/src/utils/dates/dates';
 
 type DayEventsModalContainerProps = {
-  date: string;
+  day: string;
   events: EventType[];
   onClose: () => void;
 };
 
 const DayEventsModalContainer: React.FC<DayEventsModalContainerProps> = ({
-  date,
+  day,
   events,
   onClose,
 }) => {
   const { openModal } = useEventModal();
+  const { month, year } = useCurrentViewedDate();
+  
+  const date = `${day} ${getMonthName(month)} ${year}`;
 
   const openEventModal = (event: EventType) => {
     onClose();
