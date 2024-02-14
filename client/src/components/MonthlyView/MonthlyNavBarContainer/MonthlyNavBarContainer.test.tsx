@@ -18,7 +18,7 @@ describe('MonthlyNavBarContainer', () => {
   });
 
   it('renders MonthlyNavBar with correct props', () => {
-    render(<MonthlyNavBarContainer  />);
+    render(<MonthlyNavBarContainer />);
     expect(MonthlyNavBar).toHaveBeenCalledWith(
       expect.objectContaining({
         openModal: expect.any(Function),

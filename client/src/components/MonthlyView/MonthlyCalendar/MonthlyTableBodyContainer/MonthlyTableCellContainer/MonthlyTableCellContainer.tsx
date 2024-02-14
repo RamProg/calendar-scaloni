@@ -14,11 +14,9 @@ const MonthlyTableCellContainer: React.FC<MonthlyTableCellContainerProps> = ({
   day,
   hasMoreThanThreeEvents,
 }) => {
-
   const [isDayEventsModalOpen, setIsDayEventsModalOpen] =
     useState<boolean>(false);
   const { openModal } = useEventModal();
-
 
   const toogleModal = () => {
     setIsDayEventsModalOpen((prev) => !prev);

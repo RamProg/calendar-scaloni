@@ -18,7 +18,7 @@ const DayEventsModalContainer: React.FC<DayEventsModalContainerProps> = ({
 }) => {
   const { openModal } = useEventModal();
   const { month, year } = useCurrentViewedDate();
-  
+
   const date = `${day} ${getMonthName(month)} ${year}`;
 
   const openEventModal = (event: EventType) => {

@@ -33,6 +33,8 @@ describe('MonthlyView', () => {
     );
 
     fireEvent.click(getByText('>'));
-    expect(useCurrentViewedDate().onChangeDate).toHaveBeenCalledWith('nextMonth');
+    expect(useCurrentViewedDate().onChangeDate).toHaveBeenCalledWith(
+      'nextMonth'
+    );
   });
 });

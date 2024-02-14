@@ -17,9 +17,7 @@ jest.mock('@/src/hooks/useCurrentViewedDate/useCurrentViewedDate', () => ({
 
 describe('MonthlyTableBodyContainer', () => {
   it('renders MonthlyTableCellContainer for each day of the month', () => {
-    const { getAllByTestId } = render(
-      <MonthlyTableBodyContainer />
-    );
+    const { getAllByTestId } = render(<MonthlyTableBodyContainer />);
 
     expect(getAllByTestId('monthly-table-cell')).toHaveLength(31);
   });

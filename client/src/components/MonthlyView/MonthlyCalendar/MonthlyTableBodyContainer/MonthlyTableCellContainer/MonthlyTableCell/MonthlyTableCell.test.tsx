@@ -36,7 +36,7 @@ describe('MonthlyTableCell', () => {
   ];
 
   const mockProps = {
-    day: "1",
+    day: '1',
     date: '2024-02-01',
     openModal: jest.fn(),
     isDayEventsModalOpen: false,
