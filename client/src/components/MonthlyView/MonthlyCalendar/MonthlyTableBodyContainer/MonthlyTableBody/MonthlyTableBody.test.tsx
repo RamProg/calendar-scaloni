@@ -1,7 +1,6 @@
 import { render } from '@testing-library/react';
 import MonthlyTableBody, { MonthlyTableBodyProps } from './MonthlyTableBody';
 import MonthlyTableCellContainer from '../MonthlyTableCellContainer/MonthlyTableCellContainer';
-import { MonthType } from '@/src/types';
 
 jest.mock('../MonthlyTableCellContainer/MonthlyTableCellContainer', () =>
   jest.fn(() => null)
@@ -9,8 +8,6 @@ jest.mock('../MonthlyTableCellContainer/MonthlyTableCellContainer', () =>
 
 describe('MonthlyTableBody', () => {
   const mockProps: MonthlyTableBodyProps = {
-    month: 1 as MonthType,
-    year: 2022,
     startingDay: 1,
     lastDay: 31,
     isToday: jest.fn(),
@@ -36,8 +33,6 @@ describe('MonthlyTableBody', () => {
     render(<MonthlyTableBody {...mockProps} />);
     expect(MonthlyTableCellContainer).toHaveBeenCalledWith(
       expect.objectContaining({
-        month: mockProps.month,
-        year: mockProps.year,
         dayEvents: mockProps.monthlyEventsByDay[day],
         day,
         hasMoreThanThreeEvents: false,

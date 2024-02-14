@@ -20,7 +20,7 @@ describe('DayEventsModalContainer', () => {
   it('renders correctly', () => {
     const { getByText } = render(
       <DayEventsModalContainer
-        date="2 February 2024"
+        day="2"
         events={mockedEvents}
         onClose={mockOnClose}
       />
@@ -33,7 +33,7 @@ describe('DayEventsModalContainer', () => {
   it('calls onClose and openModal when an event is clicked', () => {
     const { getByText } = render(
       <DayEventsModalContainer
-        date="2 February 2024"
+        day="2"
         events={mockedEvents}
         onClose={mockOnClose}
       />

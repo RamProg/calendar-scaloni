@@ -36,11 +36,11 @@ describe('MonthlyTableCell', () => {
   ];
 
   const mockProps = {
-    day: 1,
+    day: "1",
     date: '2024-02-01',
     openModal: jest.fn(),
     isDayEventsModalOpen: false,
-    setIsDayEventsModalOpen: jest.fn(),
+    toogleModal: jest.fn(),
   };
   const mockPropsFourEvents = {
     ...mockProps,
@@ -91,9 +91,9 @@ describe('MonthlyTableCell', () => {
     );
   });
 
-  it('calls setIsDayEventsModalOpen with true when the "Show More" button is clicked', () => {
+  it('calls toogleModal when the "Show More" button is clicked', () => {
     const { getByText } = render(<MonthlyTableCell {...mockPropsFourEvents} />);
     fireEvent.click(getByText(/Show More/i));
-    expect(mockProps.setIsDayEventsModalOpen).toHaveBeenCalledWith(true);
+    expect(mockProps.toogleModal).toHaveBeenCalled();
   });
 });

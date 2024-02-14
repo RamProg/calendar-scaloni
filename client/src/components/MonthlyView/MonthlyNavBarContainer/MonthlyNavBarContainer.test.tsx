@@ -9,12 +9,6 @@ jest.mock('@/src/utils/dates/dates');
 jest.mock('./MonthlyNavBar/MonthlyNavBar', () => jest.fn(() => null));
 
 describe('MonthlyNavBarContainer', () => {
-  const mockProps = {
-    month: 1,
-    year: 2022,
-    onChangeDate: jest.fn(),
-  };
-
   beforeEach(() => {
     (useEventModal as jest.Mock).mockReturnValue({
       openModal: jest.fn(),
@@ -24,14 +18,14 @@ describe('MonthlyNavBarContainer', () => {
   });
 
   it('renders MonthlyNavBar with correct props', () => {
-    render(<MonthlyNavBarContainer {...mockProps} />);
+    render(<MonthlyNavBarContainer  />);
     expect(MonthlyNavBar).toHaveBeenCalledWith(
       expect.objectContaining({
         openModal: expect.any(Function),
         serverErrors: { getData: false },
         monthString: 'January',
-        year: 2022,
-        onChangeDate: mockProps.onChangeDate,
+        year: 2024,
+        onChangeDate: expect.any(Function),
       }),
       {}
     );

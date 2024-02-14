@@ -63,7 +63,7 @@ describe('useEvents', () => {
       .onGet(`${SERVER_URL}/events?month=${month}&year=${year}`)
       .reply(200, mockedEvents);
 
-    const { result } = renderHook(() => useEvents({ month, year }), {
+    const { result } = renderHook(() => useEvents(), {
       wrapper,
     });
 
@@ -89,7 +89,7 @@ describe('useEvents', () => {
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     );
 
-    const { result } = renderHook(() => useEvents({ month, year }), {
+    const { result } = renderHook(() => useEvents(), {
       wrapper,
     });
 
@@ -119,7 +119,7 @@ describe('useEvents', () => {
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     );
 
-    const { result } = renderHook(() => useEvents({ month, year }), {
+    const { result } = renderHook(() => useEvents(), {
       wrapper,
     });
 
@@ -144,7 +144,7 @@ describe('useEvents', () => {
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     );
 
-    const { result } = renderHook(() => useEvents({ month, year }), {
+    const { result } = renderHook(() => useEvents(), {
       wrapper,
     });
 
