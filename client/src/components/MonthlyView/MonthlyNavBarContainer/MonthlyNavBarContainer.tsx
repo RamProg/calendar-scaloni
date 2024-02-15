@@ -5,8 +5,7 @@ import { useCurrentViewedDate } from '@/src/hooks/useCurrentViewedDate/useCurren
 
 const MonthlyNavBarContainer: React.FC = () => {
   const { month, year, onChangeDate } = useCurrentViewedDate();
-  const { openModal } = useEventModal();
-  const { serverErrors } = useEventModal();
+  const { openModal, serverErrors } = useEventModal();
 
   const monthString = getMonthName(month);
 

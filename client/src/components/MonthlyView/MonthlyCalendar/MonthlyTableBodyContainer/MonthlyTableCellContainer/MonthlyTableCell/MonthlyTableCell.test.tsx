@@ -68,7 +68,7 @@ describe('MonthlyTableCell', () => {
 
   it('renders the "Show More" button when there are more than three events', () => {
     const { getByText } = render(<MonthlyTableCell {...mockPropsFourEvents} />);
-    expect(getByText(/Show More/i)).toBeInTheDocument();
+    expect(getByText(/More/i)).toBeInTheDocument();
   });
 
   it("doesn't render the 'Show More' button when there are fewer than three events", async () => {
@@ -93,7 +93,7 @@ describe('MonthlyTableCell', () => {
 
   it('calls toogleModal when the "Show More" button is clicked', () => {
     const { getByText } = render(<MonthlyTableCell {...mockPropsFourEvents} />);
-    fireEvent.click(getByText(/Show More/i));
+    fireEvent.click(getByText(/More/i));
     expect(mockProps.toogleModal).toHaveBeenCalled();
   });
 });

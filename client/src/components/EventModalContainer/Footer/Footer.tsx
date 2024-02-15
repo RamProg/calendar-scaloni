@@ -1,5 +1,4 @@
 import Button from '@/src/components/common/Button/Button';
-import { isMobile } from 'react-device-detect';
 
 type FooterProps = {
   onSave: (id: string) => void;
@@ -22,7 +21,7 @@ const Footer: React.FC<FooterProps> = ({
       onClick={() => onSave(_id)}
       label={editOrAdd === 'add' ? 'Create' : 'Save'}
       big={true}
-      styles={isMobile ? 'mr-2' : 'ml-2'}
+      styles="mr-2 sm:ml-2 sm:mr-0"
     />
     {editOrAdd === 'edit' && (
       <Button
@@ -30,7 +29,7 @@ const Footer: React.FC<FooterProps> = ({
         onClick={() => onDelete(_id)}
         label={'Delete'}
         big={true}
-        styles={isMobile ? 'mr-2' : 'ml-2'}
+        styles="mr-2 sm:ml-2 sm:mr-0"
       />
     )}
     <Button onClick={closeModal} big={true} label="Close" />

@@ -20,15 +20,15 @@ describe('MonthlyNavBar', () => {
     }),
   };
   it('renders the current month and year', () => {
-    const { getByRole } = render(<MonthlyNavBar {...mockProps} />);
-    const monthDisplay = getByRole('heading', {
+    const { queryAllByRole } = render(<MonthlyNavBar {...mockProps} />);
+    const monthDisplay = queryAllByRole('heading', {
       name: `${mockProps.monthString} ${mockProps.year}`,
     });
-    expect(monthDisplay).toBeInTheDocument();
+    expect(monthDisplay).not.toHaveLength(0);
   });
 
   it('navigates to the next month', async () => {
-    const { getByRole, findByRole, rerender } = render(
+    const { getByRole, findAllByRole, rerender } = render(
       <MonthlyNavBar {...mockProps} />
     );
     const nextButton = getByRole('button', { name: '>' });
@@ -37,14 +37,16 @@ describe('MonthlyNavBar', () => {
 
     rerender(<MonthlyNavBar {...mockProps} />);
 
-    const monthDisplay = await findByRole('heading', {
-      name: 'February 2024',
-    });
+    const monthDisplay = (
+      await findAllByRole('heading', {
+        name: 'February 2024',
+      })
+    )[0];
     expect(monthDisplay).toBeInTheDocument();
   });
 
   it('navigates to the previous month', async () => {
-    const { getByRole, findByRole, rerender } = render(
+    const { getByRole, findAllByRole, rerender } = render(
       <MonthlyNavBar {...mockProps} />
     );
     const nextButton = getByRole('button', { name: '<' });
@@ -53,9 +55,11 @@ describe('MonthlyNavBar', () => {
 
     rerender(<MonthlyNavBar {...mockProps} />);
 
-    const monthDisplay = await findByRole('heading', {
-      name: 'December 2023',
-    });
+    const monthDisplay = (
+      await findAllByRole('heading', {
+        name: 'December 2023',
+      })
+    )[0];
     expect(monthDisplay).toBeInTheDocument();
   });
 

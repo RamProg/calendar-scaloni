@@ -1,6 +1,5 @@
 import { EventType } from '@/src/types';
 import DayEventsModalContainer from './DayEventsModalContainer/DayEventsModalContainer';
-import { isDesktop } from 'react-device-detect';
 
 type MonthlyTableCellProps = {
   dayEvents: EventType[];
@@ -40,7 +39,7 @@ const MonthlyTableCell: React.FC<MonthlyTableCellProps> = ({
               className="mx-2 mb-1 text-sm text-center underline list-none sm:mx-2 text-overflow-ellipsis whitespace-nowrap sm:text-base sm:mb-1 hover:cursor-pointer hover:text-blue-800"
               onClick={toogleModal}
             >
-              {isDesktop && 'Show '}More
+              <span className="hidden md:inline">Show </span>More
             </li>
             {isDayEventsModalOpen && (
               <DayEventsModalContainer

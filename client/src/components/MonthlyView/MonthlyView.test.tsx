@@ -16,13 +16,13 @@ describe('MonthlyView', () => {
   const queryClient = new QueryClient();
 
   it('renders correctly', () => {
-    const { getByText } = render(
+    const { queryAllByText } = render(
       <QueryClientProvider client={queryClient}>
         <MonthlyView />
       </QueryClientProvider>
     );
 
-    expect(getByText(/January 2024/i)).toBeInTheDocument();
+    expect(queryAllByText(/January 2024/i)).not.toHaveLength(0);
   });
 
   it('calls onChangeDate when date is changed', () => {
